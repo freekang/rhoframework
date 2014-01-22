@@ -21,19 +21,14 @@ LDFLAGS       =
 LDDEBUG       = -DEBUG -PDB:$*.pdb
 SOFLAGS       = -DLL $(LDDEBUG)
 
-ROOTLIBS      = $(ROOTSYS)\lib\libCint.lib \
-				$(ROOTSYS)\lib\libCore.lib \
-				$(ROOTSYS)\lib\libEG.lib \
-				$(ROOTSYS)\lib\libHist.lib \
-				$(ROOTSYS)\lib\libGraf.lib \
-				$(ROOTSYS)\lib\libGraf3D.lib \
-				$(ROOTSYS)\lib\libGPad.lib \
-				$(ROOTSYS)\lib\libMatrix.lib \
-				$(ROOTSYS)\lib\libPhysics.lib \
-				$(ROOTSYS)\lib\libTree.lib \
-				$(ROOTSYS)\lib\libTreePlayer.lib \
-                                $(ROOTSYS)\lib\libWin32gdk.lib \
-                                $(ROOTSYS)\lib\libRIO.lib
+ROOTLIBS     = 	$(ROOTSYS)\lib\libCore.lib \
+		$(ROOTSYS)\lib\libCint.lib $(ROOTSYS)\lib\libHist.lib \
+		$(ROOTSYS)\lib\libGraf.lib $(ROOTSYS)\lib\libGraf3d.lib \
+		$(ROOTSYS)\lib\libGpad.lib $(ROOTSYS)\lib\libTree.lib $(ROOTSYS)\lib\libTreePlayer.lib \
+		$(ROOTSYS)\lib\libRint.lib $(ROOTSYS)\lib\libPostscript.lib \
+		$(ROOTSYS)\lib\libMatrix.lib $(ROOTSYS)\lib\libPhysics.lib \
+		$(ROOTSYS)\lib\libNet.lib $(ROOTSYS)\lib\libRIO.lib \
+		$(ROOTSYS)\lib\libMathCore.lib $(ROOTSYS)\lib\libEG.lib
 
 NNOLIB        = ..\lib\RhoNNO.lib
 BASELIB       = ..\lib\RhoBase.lib

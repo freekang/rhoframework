@@ -76,10 +76,10 @@ $(SHLIB): $(OBJECTS)
 	BINDEXPLIB  $* $(OBJECTS) > $*.def
 	lib /nologo /MACHINE:IX86 $(OBJECTS) /def:$*.def      $(OutPutOpt)$(LIBRARY)
 	$(LD) $(SOFLAGS) $(OBJECTS) $*.exp $(LIBS) $(OutPutOpt)$(SHLIB)
-	mt.exe -manifest $(SHLIB).manifest -outputresource:$(SHLIB);2
+#	mt.exe -manifest $(SHLIB).manifest -outputresource:$(SHLIB);2
 	copy $(LIBRARY) ..\lib
 	copy $(SHLIB) ..\lib
-	copy $(PACKAGE).pdb ..\lib
+#	copy $(PACKAGE).pdb ..\lib
 
 clean:
 	@del $(OBJECTS) *.pdb $(PACKAGE)Cint.* $(PACKAGE).lib $(PACKAGE).dll $(PACKAGE).def $(PACKAGE).exp $(PACKAGE).pdb

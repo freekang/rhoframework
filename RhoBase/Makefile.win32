@@ -113,7 +113,7 @@ $(SHLIB): $(OBJECTS)
 	BINDEXPLIB  $* $(OBJECTS) > $*.def
 	lib /nologo /MACHINE:IX86 $(OBJECTS) /def:$*.def $(OutPutOpt)$(LIBDIR)/$(LIBRARY)
 	$(LD) $(SOFLAGS) $(OBJECTS) $(LIBDIR)/$*.exp $(LIBS) $(OutPutOpt)$(LIBDIR)/$(SHLIB)
-	mt.exe -manifest $(LIBDIR)/$(SHLIB).manifest -outputresource:$(LIBDIR)/$(SHLIB);2
+#	mt.exe -manifest $(LIBDIR)/$(SHLIB).manifest -outputresource:$(LIBDIR)/$(SHLIB);2
 
 $(PROGRAM): $(PROGRAMO)
 	$(LD) $(LDFLAGS) $(PROGRAMO) $(LIBS) $(OutPutOpt)$(BINDIR)\$(PROGRAM).$(ExeSuf)
