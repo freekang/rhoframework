@@ -1,0 +1,130 @@
+### Directory and Executable Names ###########
+EXADIR     = RhoExamples
+OBJDIR     = tmp
+BINDIR     = bin
+
+################################################################################################
+		
+all: SUBS
+
+exam:
+	cd RhoExamples
+	nmake -f Makefile.win32
+
+######  Targets ###############################
+
+SUBS:
+	cd ./RhoNNO
+	nmake -f Makefile.win32
+	cd ..
+	cd ./RhoGA
+	nmake -f Makefile.win32
+	cd ..
+	cd ./RhoMath
+	nmake -f Makefile.win32
+	cd ..
+	cd ./RhoBase
+	nmake -f Makefile.win32
+	cd ..
+	cd ./RhoConditions
+	nmake -f Makefile.win32
+	cd ..
+	cd ./RhoTools
+	nmake -f Makefile.win32
+	cd ..
+	cd ./RhoHistogram
+	nmake -f Makefile.win32
+	cd ..
+	cd ./PAFSchema
+	nmake -f Makefile.win32
+	cd ..
+	cd ./KangaSchema
+	nmake -f Makefile.win32
+	cd ..
+	cd ./RhoManager
+	nmake -f Makefile.win32
+	cd ..
+	cd ./RhoSelector
+	nmake -f Makefile.win32
+	cd ..
+	cd ./RhoExamples
+	nmake -f Makefile.win32
+	cd ..
+	  
+
+cleanall:
+	cd ./RhoNNO
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./RhoGA
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./RhoMath
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./RhoBase
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./RhoConditions
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./RhoTools
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./RhoHistogram
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./RhoManager
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./RhoSelector
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./PAFSchema
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./KangaSchema
+	nmake -f Makefile.win32 clean
+	cd ..
+	cd ./RhoExamples
+	nmake -f Makefile.win32 clean
+	cd ..
+
+documentation:
+	copy RhoNNO\*.cxx tmp
+	copy RhoNNO\*.h tmp
+	copy RhoMath\*.cxx tmp
+	copy RhoMath\*.h tmp
+	copy RhoBase\*.cxx tmp
+	copy RhoBase\*.h tmp
+	copy RhoConditions\*.cxx tmp
+	copy RhoConditions\*.h tmp
+	copy RhoTools\*.cxx tmp
+	copy RhoTools\*.h tmp
+	copy RhoHistogram\*.cxx tmp
+	copy RhoHistogram\*.h tmp
+	copy RhoManager\*.cxx tmp
+	copy RhoManager\*.h tmp
+	copy RhoSelector\*.cxx tmp
+	copy RhoSelector\*.h tmp
+	copy PAFSchema\*.cxx tmp
+	copy PAFSchema\*.h tmp
+	copy KangaSchema\*.cxx tmp
+	copy KangaSchema\*.h tmp
+
+	root -b RhoMacros\documentation.C
+
+#######################################
+###     Complete Cleanup            ###
+#######################################
+		
+clean :
+#        del $(BINDIR)\*.exe
+	del $(EXADIR)\*.obj
+
+
+#######  Rules ################################
+ 
+.$(SrcSuf).$(ObjSuf):
+	$(CXX) $(CXXFLAGS) -c -I. $<
+	@echo ------------------------------------------
