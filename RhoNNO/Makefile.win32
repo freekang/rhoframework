@@ -26,14 +26,21 @@ LDFLAGS       = $(LDOPT) $(conlflags) -nologo -include:_G__cpp_setupG__Hist \
 LDDEBUG       = -DEBUG -PDB:$*.pdb
 SOFLAGS       = -DLL $(LDDEBUG)
 
-ROOTLIBS      = $(ROOTSYS)/lib/libCore.lib \
-                $(ROOTSYS)/lib/libCint.lib $(ROOTSYS)/lib/libHist.lib \
-                $(ROOTSYS)/lib/libGraf.lib $(ROOTSYS)/lib/libGraf3d.lib \
-                $(ROOTSYS)/lib/libGpad.lib $(ROOTSYS)/lib/libTree.lib \
-                $(ROOTSYS)/lib/libRint.lib $(ROOTSYS)/lib/libPostscript.lib \
-                $(ROOTSYS)/lib/libMatrix.lib $(ROOTSYS)/lib/libPhysics.lib  \
-                $(ROOTSYS)/lib/libNet.lib $(ROOTSYS)/lib/libRIO.lib \
-                $(ROOTSYS)/lib/libTreePlayer.lib
+ROOTLIBS      = 	$(ROOTSYS)\lib\libCint.lib \
+		$(ROOTSYS)\lib\libCore.lib \
+		$(ROOTSYS)\lib\libMathCore.lib \
+		$(ROOTSYS)\lib\libEG.lib \
+		$(ROOTSYS)\lib\libHist.lib \
+		$(ROOTSYS)\lib\libMatrix.lib \
+		$(ROOTSYS)\lib\libPhysics.lib \
+		$(ROOTSYS)\lib\libTree.lib \
+		$(ROOTSYS)\lib\libTreePlayer.lib \
+		$(ROOTSYS)\lib\libGpad.lib \
+		$(ROOTSYS)\lib\libGraf.lib \
+		$(ROOTSYS)\lib\libGraf3D.lib \
+                                $(ROOTSYS)\lib\libWin32gdk.lib \
+                                $(ROOTSYS)\lib\libRootAuth.lib \
+                                $(ROOTSYS)\lib\libRIO.lib
 
 LIBS          = $(ROOTLIBS) $(guilibsdll)
 LIBSALL       = $(ROOTLIBS)
@@ -104,7 +111,7 @@ $(SHLIB): $(OBJECTS)
 	BINDEXPLIB  $* $(OBJECTS) > $*.def
 	lib /nologo /MACHINE:IX86 $(OBJECTS) /def:$*.def      $(OutPutOpt)$(LIBRARY)
 	$(LD) $(SOFLAGS) $(OBJECTS) $*.exp $(LIBS) $(OutPutOpt)$(SHLIB)
-        mt.exe -manifest $(SHLIB).manifest -outputresource:$(SHLIB);2
+#                mt.exe -manifest $(SHLIB).manifest -outputresource:$(SHLIB);2
 	copy $(LIBRARY) ..\lib
 	copy $(SHLIB) ..\lib
 	copy $(PACKAGE).pdb ..\lib
