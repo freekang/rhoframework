@@ -11,6 +11,9 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
+#include <string>
+using namespace std;
+
 #include "TObject.h"
 
 class VAbsCollection : public TObject 
@@ -22,7 +25,7 @@ class VAbsCollection : public TObject
     virtual void Rewind() = 0;
     Int_t GetIndex() { return fCurrentIndex; }
     virtual Int_t NextIndex(Bool_t &changeFile) = 0;
-    virtual const char* GetFileName() const  =0;
+    virtual string GetFileName() const  =0;
     virtual Bool_t InitRead();
 
     virtual void Fill(const char* fname, UInt_t n, UInt_t min=0, UInt_t maj=0) {}
