@@ -95,7 +95,7 @@ TEventCollection::Rewind()
     fStop = & ( (fBlock->GetBuffer())[fBlock->GetBufLen()-1]   );
 }
 
-const char*
+string
 TEventCollection::GetFileName() const 
 {
     if (fCurrentFileName.Length()>0) {

@@ -78,7 +78,7 @@ TRunCollection::NextIndex(Bool_t &changeFile)
   return fCurrentIndex;
 }
 
-const char*
+string
 TRunCollection::GetFileName() const 
 {
   if (fCurrentBlockNo < fEntryList->GetEntries()) {

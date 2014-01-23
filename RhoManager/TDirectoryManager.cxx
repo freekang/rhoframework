@@ -86,10 +86,13 @@ Int_t TDirectoryManager::NextIndex(Bool_t &changeFile)
     return fCounter++; 
 }
 
-const char* TDirectoryManager::GetFileName() const 
+string TDirectoryManager::GetFileName() const 
 {
     if (fFiles.At(fActualFile) == 0) return "";
-    return ((TObjString*) fFiles.At(fActualFile))->GetString().Data(); 
+	TObject *o = fFiles.At(fActualFile);
+	TObjString* os = (TObjString*) o;
+	string s = os->GetString();
+	return s;
 }
 
 Bool_t TDirectoryManager::InitRead() 

@@ -182,7 +182,7 @@ TEventManager::GetCurrentIndex()
 const char* 
 TEventManager::GetCurrentFilename()
 {
-    const char *name;
+    string name;
     
     if (fActiveCollection) 
     {
@@ -191,10 +191,10 @@ TEventManager::GetCurrentFilename()
     } 
     else 
     {
-	name = fFile.Data();	
+	name = fFile.c_str();	
     }
     
-    return name;
+	return name.c_str();
 }
 
 UInt_t TEventManager::GetNumberOfEventsProcessed() const {
@@ -272,8 +272,8 @@ Bool_t TEventManager::Next()
 	
 	// Check, if the file has changed
 	if (fChange) {
-	    TString newFile = fCollection->GetFileName();
-	    if (newFile.Length()!=0) { // more to do ?
+	    string newFile = fCollection->GetFileName();
+	    if (newFile.length()!=0) { // more to do ?
 		SetInputFile(newFile);
 		fChange=kFALSE;
 	    } else {
@@ -301,9 +301,9 @@ void TEventManager::UseCollection(VAbsCollection *c)
     fActiveCollection=kTRUE;
     fCollection = c;
     c->InitRead();
-    TString f = c->GetFileName();
-    if (f.Length()!=0) {
-	SetInputFile(f);
+    string f = c->GetFileName();
+	if (f.length()!=0) {
+		SetInputFile(f);
     }
 }
 
@@ -337,24 +337,26 @@ void TEventManager::UseCollection(const char* filename)
     }
 }
 
-void TEventManager::SetInputFile(const char *filename)
+void TEventManager::SetInputFile(string filename)
 {
-    fFile = FullyQualified(filename);	// Note the current file
+    filename = FullyQualified(filename);	// Note the current file
+	fFile = filename;
     
     // Check the mode of operation (Kanga or PAF)
     
-    fKanga = (fFile.Index("Kanga") >= 0);
-    if (fFile.Index("-micro")==fFile.Length()-6) {
-	fFile = fFile(0,fFile.Length()-6); // Remove the suffix
+	int index = fFile.find("Kanga");
+    fKanga = (index >= 0);
+    if (fFile.find("-micro")==fFile.length()-6) {
+		fFile = fFile.substr(0,fFile.length()-6); // Remove the suffix
 	fKanga = kTRUE;
     }
     
     if (fReader != 0) delete fReader; // Get rid of the old reader
     
     if (fKanga)
-	fReader = new KangaReader(fFile);
+	fReader = new KangaReader(fFile.c_str());
     else
-	fReader = new PAFReader(fFile);
+	fReader = new PAFReader(fFile.c_str());
 
     // Activate the streams to process
     TParameterManager *parmgr = TRho::Instance()->GetParameterManager();
@@ -373,18 +375,19 @@ void TEventManager::SetInputFile(const char *filename)
     fReader->SetTagFormula(fTagExpr);
 }
 
-TString TEventManager::FullyQualified(TString s)
+string TEventManager::FullyQualified(string s)
 {
     // Check that we have a fully qualified Unix or Windows filename
     
-    if (s.Data()[0] == '/') return s; // UNIX
-    if (s.Data()[0] == '$') return s; // Environment
-    if (s.Data()[0] == '~') return s; // Home directory
-    if (s.Data()[0] == '.') return s; // Absolute path
-    if (s.Data()[1] == ':') return s; // Windows drive letter
-    if (s.Index("root:")==0) return s; // ROOTD file
+    if (s.c_str()[0] == '/') return s; // UNIX
+    if (s.c_str()[0] == '$') return s; // Environment
+    if (s.c_str()[0] == '~') return s; // Home directory
+    if (s.c_str()[0] == '.') return s; // Absolute path
+    if (s.c_str()[1] == ':') return s; // Windows drive letter
+    if (s.find("root:")==0) return s; // ROOTD file
     
-    s = TString(TRho::Instance()->GetEventStore())+"/"+s; // Prepend the base directory
+	string base = TRho::Instance()->GetEventStore();
+    s = base+"/"+s; // Prepend the base directory
     
     return s;
 }

@@ -14,6 +14,8 @@
 //////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
+#include <string>
+using namespace std;
 
 #include "TFile.h"
 #include "TChain.h"
@@ -41,7 +43,7 @@ public:
 //  Collection interface
     virtual void Rewind();
     virtual Int_t NextIndex(Bool_t &changeFile);
-    virtual const char* GetFileName() const;
+    virtual string GetFileName() const;
     virtual Bool_t InitRead();
 
 protected:

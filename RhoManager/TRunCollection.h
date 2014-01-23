@@ -14,6 +14,8 @@
 //////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
+#include <string>
+using namespace std;
 
 #include "RhoBase/VAbsCollection.h"
 
@@ -29,7 +31,7 @@ class TRunCollection : public VAbsCollection {
 
     virtual void Rewind();
     virtual Int_t NextIndex(Bool_t &changeFile);
-    virtual const char* GetFileName() const;
+    virtual string GetFileName() const;
     virtual Bool_t InitRead();
 
     void AddRun(TRunInfo *run);

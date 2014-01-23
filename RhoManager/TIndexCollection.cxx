@@ -71,7 +71,7 @@ TIndexCollection::Rewind()
   fEventNumber=0;
 }
 
-const char*
+string
 TIndexCollection::GetFileName() const 
 {
   return fFilename;

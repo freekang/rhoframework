@@ -12,6 +12,8 @@
 //////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
+#include <string>
+using namespace std;
 
 #include "TFile.h"
 #include "TString.h"
@@ -141,12 +143,12 @@ protected:
     void CreateVAbsTruthList();
     
 private:
-    void SetInputFile(const char *filename);
-    TString FullyQualified(TString);
+    void SetInputFile(string filename);
+    string FullyQualified(string);
 
     VAbsReader		    *fReader;	// !Concrete implementation
     TDirectoryManager*	    fDirMgr;	// !The actual directory manager
-    TString		    fFile;	// !Name of database file
+    string		    fFile;	// !Name of database file
     Bool_t		    fKanga;	// !File type
     Bool_t		    fActiveCollection,  // !Flag for collection mode
 			    fChange;		// !Flags need to open the next file
