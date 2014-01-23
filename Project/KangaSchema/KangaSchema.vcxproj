@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\KangaSchema\BtaAbsVertexR.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaCandAssocMap.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaCandAssocMapR.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaCandidateR.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaCandListR.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaCandListR_001.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaCandPtrR.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaClonedCandR_000.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaClonedCompositeCandR_000.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaCompositeCandR_000.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaFitParamsR.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaFitParamsR_002.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaMicroCandidate.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaMicroCandR.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaMicroCandR_001.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaMicroCandR_002.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaMicroCandR_003.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaMicroCandR_004.h" />
+    <ClInclude Include="..\..\KangaSchema\BtaMicroCandR_005.h" />
+    <ClInclude Include="..\..\KangaSchema\ComPackBase.h" />
+    <ClInclude Include="..\..\KangaSchema\ComPackExpFloat.h" />
+    <ClInclude Include="..\..\KangaSchema\ComPackFlatFloat.h" />
+    <ClInclude Include="..\..\KangaSchema\ComPackFloat.h" />
+    <ClInclude Include="..\..\KangaSchema\ComPackNonFlatFloat.h" />
+    <ClInclude Include="..\..\KangaSchema\ComPackUFloat.h" />
+    <ClInclude Include="..\..\KangaSchema\EidInfoR.h" />
+    <ClInclude Include="..\..\KangaSchema\kanga.h" />
+    <ClInclude Include="..\..\KangaSchema\KangaReader.h" />
+    <ClInclude Include="..\..\KangaSchema\KangaSchemaCint.h" />
+    <ClInclude Include="..\..\KangaSchema\KangaSchema_LinkDef.h" />
+    <ClInclude Include="..\..\KangaSchema\RooClonesClassObj.h" />
+    <ClInclude Include="..\..\KangaSchema\RooClonesVectorI.h" />
+    <ClInclude Include="..\..\KangaSchema\RooClonesVectorR.h" />
+    <ClInclude Include="..\..\KangaSchema\RooEvtObj.h" />
+    <ClInclude Include="..\..\KangaSchema\RooPersObj.h" />
+    <ClInclude Include="..\..\KangaSchema\RooRef.h" />
+    <ClInclude Include="..\..\KangaSchema\RooValArray.h" />
+    <ClInclude Include="..\..\KangaSchema\StdHepR.h" />
+    <ClInclude Include="..\..\KangaSchema\StdHepTrkR.h" />
+    <ClInclude Include="..\..\KangaSchema\TBtaCalQualR.h" />
+    <ClInclude Include="..\..\KangaSchema\TBtaFitParamsR.h" />
+    <ClInclude Include="..\..\KangaSchema\TBtaFitParamsR_001.h" />
+    <ClInclude Include="..\..\KangaSchema\TBtaIfrQualR.h" />
+    <ClInclude Include="..\..\KangaSchema\TBtaMicroCandR.h" />
+    <ClInclude Include="..\..\KangaSchema\TBtaPidInfoR.h" />
+    <ClInclude Include="..\..\KangaSchema\TBtaPidQualR.h" />
+    <ClInclude Include="..\..\KangaSchema\TBtaTrkQualR.h" />
+    <ClInclude Include="..\..\KangaSchema\VtxVertexR.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\KangaSchema\BtaAbsVertexR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaCandAssocMapR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaCandidateR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaCandListR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaCandListR_001.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaCandPtrR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaClonedCandR_000.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaClonedCompositeCandR_000.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaCompositeCandR_000.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaFitParamsR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaFitParamsR_002.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaMicroCandidate.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaMicroCandR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaMicroCandR_001.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaMicroCandR_002.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaMicroCandR_003.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaMicroCandR_004.cxx" />
+    <ClCompile Include="..\..\KangaSchema\BtaMicroCandR_005.cxx" />
+    <ClCompile Include="..\..\KangaSchema\ComPackBase.cxx" />
+    <ClCompile Include="..\..\KangaSchema\ComPackExpFloat.cxx" />
+    <ClCompile Include="..\..\KangaSchema\ComPackFlatFloat.cxx" />
+    <ClCompile Include="..\..\KangaSchema\ComPackFloat.cxx" />
+    <ClCompile Include="..\..\KangaSchema\ComPackNonFlatFloat.cxx" />
+    <ClCompile Include="..\..\KangaSchema\ComPackUFloat.cxx" />
+    <ClCompile Include="..\..\KangaSchema\EidInfoR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\kanga.cxx" />
+    <ClCompile Include="..\..\KangaSchema\KangaReader.cxx" />
+    <ClCompile Include="..\..\KangaSchema\KangaSchemaCint.cxx" />
+    <ClCompile Include="..\..\KangaSchema\RooClonesClassObj.cxx" />
+    <ClCompile Include="..\..\KangaSchema\RooClonesVectorI.cxx" />
+    <ClCompile Include="..\..\KangaSchema\RooClonesVectorR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\RooEvtObj.cxx" />
+    <ClCompile Include="..\..\KangaSchema\RooPersObj.cxx" />
+    <ClCompile Include="..\..\KangaSchema\RooRef.cxx" />
+    <ClCompile Include="..\..\KangaSchema\RooValArray.cxx" />
+    <ClCompile Include="..\..\KangaSchema\StdHepR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\StdHepTrkR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\TBtaCalQualR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\TBtaFitParamsR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\TBtaFitParamsR_001.cxx" />
+    <ClCompile Include="..\..\KangaSchema\TBtaIfrQualR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\TBtaMicroCandR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\TBtaPidInfoR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\TBtaPidQualR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\TBtaTrkQualR.cxx" />
+    <ClCompile Include="..\..\KangaSchema\VtxVertexR.cxx" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CEA72C51-454E-4AC6-99F5-5E2E98CECE37}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>KangaSchema</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Rhoframework\RhoFramework.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Rhoframework\RhoFramework.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

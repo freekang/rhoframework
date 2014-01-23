@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\PAFSchema\PAFAbsPidInfo.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFAodBase.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFAodCluster.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFAodTrack.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFBitBase.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFChargedAodBase.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFCompAodBase.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFEventBase.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFListBase.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFMcAssocBase.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFMcBase.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFMcTruth.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFMicroCandidate.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFNeutralAodBase.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFReader.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFSchemaCint.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFSchema_LinkDef.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFStream.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFTagBase.h" />
+    <ClInclude Include="..\..\PAFSchema\PAFWriter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\PAFSchema\PAFAbsPidInfo.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFAodBase.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFAodCluster.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFAodTrack.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFBitBase.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFChargedAodBase.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFCompAodBase.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFEventBase.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFListBase.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFMcAssocBase.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFMcBase.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFMcTruth.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFMicroCandidate.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFNeutralAodBase.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFReader.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFSchemaCint.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFStream.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFTagBase.cxx" />
+    <ClCompile Include="..\..\PAFSchema\PAFWriter.cxx" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7A36E572-4E06-47C3-8701-CC6542B14AD4}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>PAFSchema</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Rhoframework\RhoFramework.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Rhoframework\RhoFramework.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

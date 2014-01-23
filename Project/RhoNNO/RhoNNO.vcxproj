@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\RhoNNO\RhoNNOCint.h" />
+    <ClInclude Include="..\..\RhoNNO\RhoNNO_LinkDef.h" />
+    <ClInclude Include="..\..\RhoNNO\TDataServe.h" />
+    <ClInclude Include="..\..\RhoNNO\TFD.h" />
+    <ClInclude Include="..\..\RhoNNO\TGCS.h" />
+    <ClInclude Include="..\..\RhoNNO\TGNG.h" />
+    <ClInclude Include="..\..\RhoNNO\TLVQ.h" />
+    <ClInclude Include="..\..\RhoNNO\TMLP.h" />
+    <ClInclude Include="..\..\RhoNNO\TNeuralNetCell.h" />
+    <ClInclude Include="..\..\RhoNNO\TNNK.h" />
+    <ClInclude Include="..\..\RhoNNO\TPerceptron.h" />
+    <ClInclude Include="..\..\RhoNNO\TSGCS.h" />
+    <ClInclude Include="..\..\RhoNNO\TSGNG.h" />
+    <ClInclude Include="..\..\RhoNNO\TXMLP.h" />
+    <ClInclude Include="..\..\RhoNNO\VNeuralNet.h" />
+    <ClInclude Include="..\..\RhoNNO\VNeuralNetPlotter.h" />
+    <ClInclude Include="..\..\RhoNNO\VSupervisedNet.h" />
+    <ClInclude Include="..\..\RhoNNO\VUnsupervisedNet.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\RhoNNO\RhoNNOCint.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TDataServe.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TFD.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TGCS.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TGNG.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TLVQ.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TMLP.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TNeuralNetCell.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TNNK.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TPerceptron.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TSGCS.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TSGNG.cxx" />
+    <ClCompile Include="..\..\RhoNNO\TXMLP.cxx" />
+    <ClCompile Include="..\..\RhoNNO\VNeuralNet.cxx" />
+    <ClCompile Include="..\..\RhoNNO\VNeuralNetPlotter.cxx" />
+    <ClCompile Include="..\..\RhoNNO\VSupervisedNet.cxx" />
+    <ClCompile Include="..\..\RhoNNO\VUnsupervisedNet.cxx" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{45079F9C-ACA9-4BA7-9E77-BB1222498B79}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>RhoNNO</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Rhoframework\RhoFramework.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Rhoframework\RhoFramework.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

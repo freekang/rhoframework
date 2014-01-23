@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\RhoTools\RhoToolsCint.h" />
+    <ClInclude Include="..\..\RhoTools\RhoTools_LinkDef.h" />
+    <ClInclude Include="..\..\RhoTools\TAdd4Vertexer.h" />
+    <ClInclude Include="..\..\RhoTools\TBooster.h" />
+    <ClInclude Include="..\..\RhoTools\TBVariables.h" />
+    <ClInclude Include="..\..\RhoTools\TCandListSort.h" />
+    <ClInclude Include="..\..\RhoTools\TCandPtr.h" />
+    <ClInclude Include="..\..\RhoTools\TCandReader.h" />
+    <ClInclude Include="..\..\RhoTools\TConeMomFlow.h" />
+    <ClInclude Include="..\..\RhoTools\TCones.h" />
+    <ClInclude Include="..\..\RhoTools\TDecayMode.h" />
+    <ClInclude Include="..\..\RhoTools\TDecayTree.h" />
+    <ClInclude Include="..\..\RhoTools\TDiagVertex.h" />
+    <ClInclude Include="..\..\RhoTools\TDummyFitter.h" />
+    <ClInclude Include="..\..\RhoTools\TEventShape.h" />
+    <ClInclude Include="..\..\RhoTools\TFastCombiner.h" />
+    <ClInclude Include="..\..\RhoTools\TFindOmittedParticle.h" />
+    <ClInclude Include="..\..\RhoTools\TFoxWolfMom.h" />
+    <ClInclude Include="..\..\RhoTools\TFWMoments.h" />
+    <ClInclude Include="..\..\RhoTools\TLgndrMomFlow.h" />
+    <ClInclude Include="..\..\RhoTools\TMomTensor.h" />
+    <ClInclude Include="..\..\RhoTools\TOpAdd4.h" />
+    <ClInclude Include="..\..\RhoTools\TOpClone.h" />
+    <ClInclude Include="..\..\RhoTools\TOperator.h" />
+    <ClInclude Include="..\..\RhoTools\TOperatorBase.h" />
+    <ClInclude Include="..\..\RhoTools\TOpMakeTree.h" />
+    <ClInclude Include="..\..\RhoTools\TPrintTree.h" />
+    <ClInclude Include="..\..\RhoTools\TReadTree.h" />
+    <ClInclude Include="..\..\RhoTools\TSphericity.h" />
+    <ClInclude Include="..\..\RhoTools\TThrust.h" />
+    <ClInclude Include="..\..\RhoTools\TThrustVector.h" />
+    <ClInclude Include="..\..\RhoTools\TTotalMomentum.h" />
+    <ClInclude Include="..\..\RhoTools\TTreeNavigator.h" />
+    <ClInclude Include="..\..\RhoTools\TUnaryOperator.h" />
+    <ClInclude Include="..\..\RhoTools\VAbsFitter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\RhoTools\RhoToolsCint.cxx" />
+    <ClCompile Include="..\..\RhoTools\TAdd4Vertexer.cxx" />
+    <ClCompile Include="..\..\RhoTools\TBooster.cxx" />
+    <ClCompile Include="..\..\RhoTools\TBVariables.cxx" />
+    <ClCompile Include="..\..\RhoTools\TCandListSort.cxx" />
+    <ClCompile Include="..\..\RhoTools\TCandPtr.cxx" />
+    <ClCompile Include="..\..\RhoTools\TCandReader.cxx" />
+    <ClCompile Include="..\..\RhoTools\TConeMomFlow.cxx" />
+    <ClCompile Include="..\..\RhoTools\TCones.cxx" />
+    <ClCompile Include="..\..\RhoTools\TDecayMode.cxx" />
+    <ClCompile Include="..\..\RhoTools\TDecayTree.cxx" />
+    <ClCompile Include="..\..\RhoTools\TDiagVertex.cxx" />
+    <ClCompile Include="..\..\RhoTools\TDummyFitter.cxx" />
+    <ClCompile Include="..\..\RhoTools\TEventShape.cxx" />
+    <ClCompile Include="..\..\RhoTools\TFastCombiner.cxx" />
+    <ClCompile Include="..\..\RhoTools\TFindOmittedParticle.cxx" />
+    <ClCompile Include="..\..\RhoTools\TFoxWolfMom.cxx" />
+    <ClCompile Include="..\..\RhoTools\TFWMoments.cxx" />
+    <ClCompile Include="..\..\RhoTools\TLgndrMomFlow.cxx" />
+    <ClCompile Include="..\..\RhoTools\TMomTensor.cxx" />
+    <ClCompile Include="..\..\RhoTools\TOpAdd4.cxx" />
+    <ClCompile Include="..\..\RhoTools\TOpClone.cxx" />
+    <ClCompile Include="..\..\RhoTools\TOperator.cxx" />
+    <ClCompile Include="..\..\RhoTools\TOperatorBase.cxx" />
+    <ClCompile Include="..\..\RhoTools\TOpMakeTree.cxx" />
+    <ClCompile Include="..\..\RhoTools\TPrintTree.cxx" />
+    <ClCompile Include="..\..\RhoTools\TReadTree.cxx" />
+    <ClCompile Include="..\..\RhoTools\TSphericity.cxx" />
+    <ClCompile Include="..\..\RhoTools\TThrust.cxx" />
+    <ClCompile Include="..\..\RhoTools\TThrustVector.cxx" />
+    <ClCompile Include="..\..\RhoTools\TTotalMomentum.cxx" />
+    <ClCompile Include="..\..\RhoTools\TTreeNavigator.cxx" />
+    <ClCompile Include="..\..\RhoTools\TUnaryOperator.cxx" />
+    <ClCompile Include="..\..\RhoTools\VAbsFitter.cxx" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C095DF9A-8957-4706-8978-AC71D5B2664C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>RhoTools</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Rhoframework\RhoFramework.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Rhoframework\RhoFramework.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
