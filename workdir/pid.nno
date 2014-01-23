@@ -11,8 +11,8 @@ start 1
 stop 100
 
 #define the data source
-datapath ../Data
-networkpath ../Networks
+datapath $RHO/Data
+networkpath $RHO/Networks
 file PidTuple.root
 
 #set up the input layer (use branch names)
