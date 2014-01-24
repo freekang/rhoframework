@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GA3DArrayGenome.cxx,v 1.2 2001-12-17 17:55:43 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   array3.C
   mbwall 25feb95
@@ -89,7 +89,7 @@ template <class T> int
 GA3DArrayGenome<T>::resize(int w, int h, int d)
 {
   if(w == STA_CAST(int,nx) && h == STA_CAST(int,ny) && d == STA_CAST(int,nz))
-    return sz;
+    return this->sz;
 
   if(w == GAGenome::ANY_SIZE)
     w = GARandomInt(minX, maxX);
@@ -166,20 +166,20 @@ GA3DArrayGenome<T>::resize(int w, int h, int d)
 
   nx = w; ny = h; nz = d;
   _evaluated = gaFalse;
-  return sz;
+  return this->sz;
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 template <class T> int
-GA3DArrayGenome<T>::read(std::istream &) {
+GA3DArrayGenome<T>::read(STD_ISTREAM &) {
   GAErr(GA_LOC, className(), "read", gaErrOpUndef);
   return 1;
 }
 
 
 template <class T> int
-GA3DArrayGenome<T>::write(std::ostream & os) const 
+GA3DArrayGenome<T>::write(STD_OSTREAM & os) const 
 {
   for(unsigned int k=0; k<nz; k++){
     for(unsigned int j=0; j<ny; j++){
@@ -322,10 +322,10 @@ GA3DArrayGenome<T>(w,h,d,f,u) {
   aset = new GAAlleleSet<T>[1];
   aset[0] = s;
 
-  initializer(DEFAULT_3DARRAY_ALLELE_INITIALIZER);
-  mutator(DEFAULT_3DARRAY_ALLELE_MUTATOR);
-  comparator(DEFAULT_3DARRAY_ALLELE_COMPARATOR);
-  crossover(DEFAULT_3DARRAY_ALLELE_CROSSOVER);
+  initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
+  mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
+  comparator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_COMPARATOR);
+  crossover(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_CROSSOVER);
 }
 
 template <class T> 
@@ -339,10 +339,10 @@ GA3DArrayGenome<T>(w,h,d, f, u) {
   for(int i=0; i<naset; i++)
     aset[i] = sa.set(i);
 
-  initializer(DEFAULT_3DARRAY_ALLELE_INITIALIZER);
-  mutator(DEFAULT_3DARRAY_ALLELE_MUTATOR);
-  comparator(DEFAULT_3DARRAY_ALLELE_COMPARATOR);
-  crossover(DEFAULT_3DARRAY_ALLELE_CROSSOVER);
+  initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
+  mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
+  comparator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_COMPARATOR);
+  crossover(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_CROSSOVER);
 }
 
 
@@ -388,56 +388,61 @@ GA3DArrayAlleleGenome<T>::copy(const GAGenome& orig){
 
 template <class T> int
 GA3DArrayAlleleGenome<T>::resize(int w, int h, int d){
-  unsigned int oldx = nx;
-  unsigned int oldy = ny;
-  unsigned int oldz = nz;
+  unsigned int oldx = this->nx;
+  unsigned int oldy = this->ny;
+  unsigned int oldz = this->nz;
   GA3DArrayGenome<T>::resize(w,h,d);
 
 // set new elements to proper randomly selected values
 
-  if(nx > oldx && ny > oldy){
-    int z=GAMin(oldz,nz);
+  if(this->nx > oldx && this->ny > oldy){
+    int z=GAMin(oldz,this->nz);
     for(int k=z-1; k>=0; k--){
       int j;
       for(j=oldy-1; j>=0; j--)
-	for(unsigned int i=oldx; i<nx; i++)
-	  a[k*ny*nx+j*nx+i] = aset[(k*ny*nx+j*nx+i) % naset].allele();
-      for(j=oldy; j<STA_CAST(int,ny); j++)
-	for(unsigned int i=0; i<nx; i++)
-	  a[k*ny*nx+j*nx+i] = aset[(k*ny*nx+j*nx+i) % naset].allele();
+	for(unsigned int i=oldx; i<this->nx; i++)
+	  this->a[k * this->ny * this->nx + j * this->nx + i] =
+	    aset[(k*this->ny*this->nx+j*this->nx+i) % naset].allele();
+      for(j=oldy; j<STA_CAST(int,this->ny); j++)
+	for(unsigned int i=0; i<this->nx; i++)
+	  this->a[k * this->ny * this->nx + j * this->nx + i] =
+	    aset[(k * this->ny * this->nx + j * this->nx + i) % naset].allele();
     }
   }
-  else if(nx > oldx){
-    int z=GAMin(oldz,nz);
+  else if(this->nx > oldx){
+    int z=GAMin(oldz,this->nz);
     for(int k=z-1; k>=0; k--)
-      for(int j=ny-1; j>=0; j--)
-	for(unsigned int i=oldx; i<nx; i++)
-	  a[k*ny*nx+j*nx+i] = aset[(k*ny*nx+j*nx+i) % naset].allele();
+      for(int j=this->ny-1; j>=0; j--)
+	for(unsigned int i=oldx; i<this->nx; i++)
+	  this->a[k*this->ny*this->nx+j*this->nx+i] = 
+	    aset[(k*this->ny*this->nx+j*this->nx+i) % naset].allele();
   }
-  else if(ny > oldy){
-    int z=GAMin(oldz,nz);
+  else if(this->ny > oldy){
+    int z=GAMin(oldz,this->nz);
     for(int k=z-1; k>=0; k--)
-      for(unsigned int j=oldy; j<ny; j++)
-	for(unsigned int i=0; i<nx; i++)
-	  a[k*ny*nx+j*nx+i] = aset[(k*ny*nx+j*nx+i) % naset].allele();
+      for(unsigned int j=oldy; j<this->ny; j++)
+	for(unsigned int i=0; i<this->nx; i++)
+	  this->a[k*this->ny*this->nx+j*this->nx+i] =
+	    aset[(k*this->ny*this->nx+j*this->nx+i) % naset].allele();
   }
-  if(nz > oldz){		// change in depth is always new elements
-    for(unsigned int i=nx*ny*oldz; i<nx*ny*nz; i++)
-      a[i] = aset[i % naset].allele();
+  if(this->nz > oldz){		// change in depth is always new elements
+    for(unsigned int i=this->nx*this->ny*oldz;
+	i<this->nx*this->ny*this->nz; i++)
+      this->a[i] = aset[i % naset].allele();
   }
 
-  return sz;
+  return this->sz;
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 template <class T> int
-GA3DArrayAlleleGenome<T>::read(std::istream& is){
+GA3DArrayAlleleGenome<T>::read(STD_ISTREAM& is){
   return GA3DArrayGenome<T>::read(is);
 }
 
 template <class T> int
-GA3DArrayAlleleGenome<T>::write(std::ostream& os) const {
+GA3DArrayAlleleGenome<T>::write(STD_OSTREAM& os) const {
   return GA3DArrayGenome<T>::write(os);
 }
 #endif

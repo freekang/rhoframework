@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAIncGA.cxx,v 1.1.1.1 2001-05-04 16:13:03 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   gainc.C
   mbwall 28jul94

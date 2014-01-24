@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GARealGenome.cxx,v 1.3 2006-01-25 20:41:30 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   real.C
   mbwall 11nov95
@@ -10,78 +10,12 @@
 ---------------------------------------------------------------------------- */
 #include <RhoGA/GARealGenome.h>
 
-const char * 
-GA1DArrayAlleleGenome<float>::className() const {return "GARealGenome";}
-int GA1DArrayAlleleGenome<float>::classID() const {return GAID::FloatGenome;}
-
-GA1DArrayAlleleGenome<float>::
-GA1DArrayAlleleGenome(unsigned int length, const GAAlleleSet<float> & s,
-		      GAGenome::Evaluator f, void * u) :
-GA1DArrayGenome<float>(length, f, u){
-  naset = 1;
-  aset = new GAAlleleSet<float>[1];
-  aset[0] = s;
-
-  initializer(DEFAULT_REAL_INITIALIZER);
-  mutator(DEFAULT_REAL_MUTATOR);
-  comparator(DEFAULT_REAL_COMPARATOR);
-  crossover(DEFAULT_REAL_CROSSOVER);
-}
-
-GA1DArrayAlleleGenome<float>::
-GA1DArrayAlleleGenome(const GAAlleleSetArray<float> & sa,
-		      GAGenome::Evaluator f, void * u) :
-GA1DArrayGenome<float>(sa.size(), f, u){
-  naset = sa.size();
-  aset = new GAAlleleSet<float>[naset];
-  for(int i=0; i<naset; i++)
-    aset[i] = sa.set(i);
-
-  initializer(DEFAULT_REAL_INITIALIZER);
-  mutator(DEFAULT_REAL_MUTATOR);
-  comparator(DEFAULT_REAL_COMPARATOR);
-  crossover(DEFAULT_REAL_CROSSOVER);
-}
-
-//GA1DArrayAlleleGenome<float>::~GA1DArrayAlleleGenome(){
-//  delete [] aset;
-//}
-
-
-
-#ifndef NO_STREAMS
-// The read specialization takes in each number and stuffs it into the array.
-int
-GA1DArrayAlleleGenome<float>::read(std::istream & is) {
-  unsigned int i=0;
-  float val;
-  do{
-    is >> val;
-    if(!is.fail()) gene(i++, val);
-  } while(!is.fail() && !is.eof() && i < nx);
-
-  if(is.eof() && i < nx){
-    GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
-    is.clear(ios::badbit | is.rdstate());
-    return 1;
-  }
-  return 0;
-}
-
-// No need to specialize the write method.
-#endif
-
-
-
-
-
-
 
 // We must also specialize the allele set so that the alleles are handled
 // properly.  Be sure to handle bounds correctly whether we are discretized
 // or continuous.  Handle the case where someone sets stupid bounds that 
 // might cause an infinite loop for exclusive bounds.
-float
+template <> float
 GAAlleleSet<float>::allele() const {
   float value = 0.0;
   if(core->type == GAAllele::ENUMERATED)
@@ -113,7 +47,7 @@ GAAlleleSet<float>::allele() const {
 // If someone asks for a discretized item that is beyond the bounds, give them
 // one of the bounds.  If they ask for allele item when there is no
 // discretization or enumeration, then error and return lower bound.
-float
+template <> float
 GAAlleleSet<float>::allele(unsigned int i) const {
   float value = 0.0;
   if(core->type == GAAllele::ENUMERATED)
@@ -133,6 +67,75 @@ GAAlleleSet<float>::allele(unsigned int i) const {
   }
   return value;
 }
+
+
+
+
+
+// now the specialization of the genome itself.
+
+template <> const char * 
+GA1DArrayAlleleGenome<float>::className() const {return "GARealGenome";}
+template <> int 
+GA1DArrayAlleleGenome<float>::classID() const {return GAID::FloatGenome;}
+
+template <> GA1DArrayAlleleGenome<float>::
+GA1DArrayAlleleGenome(unsigned int length, const GAAlleleSet<float> & s,
+		      GAGenome::Evaluator f, void * u) :
+GA1DArrayGenome<float>(length, f, u){
+  naset = 1;
+  aset = new GAAlleleSet<float>[1];
+  aset[0] = s;
+
+  initializer(DEFAULT_REAL_INITIALIZER);
+  mutator(DEFAULT_REAL_MUTATOR);
+  comparator(DEFAULT_REAL_COMPARATOR);
+  crossover(DEFAULT_REAL_CROSSOVER);
+}
+
+template <> GA1DArrayAlleleGenome<float>::
+GA1DArrayAlleleGenome(const GAAlleleSetArray<float> & sa,
+		      GAGenome::Evaluator f, void * u) :
+GA1DArrayGenome<float>(sa.size(), f, u){
+  naset = sa.size();
+  aset = new GAAlleleSet<float>[naset];
+  for(int i=0; i<naset; i++)
+    aset[i] = sa.set(i);
+
+  initializer(DEFAULT_REAL_INITIALIZER);
+  mutator(DEFAULT_REAL_MUTATOR);
+  comparator(DEFAULT_REAL_COMPARATOR);
+  crossover(DEFAULT_REAL_CROSSOVER);
+}
+
+template <> 
+GA1DArrayAlleleGenome<float>::~GA1DArrayAlleleGenome(){
+  delete [] aset;
+}
+
+
+
+#ifdef GALIB_USE_STREAMS
+// The read specialization takes in each number and stuffs it into the array.
+template <> int
+GA1DArrayAlleleGenome<float>::read(STD_ISTREAM & is) {
+  unsigned int i=0;
+  float val;
+  do{
+    is >> val;
+    if(!is.fail()) gene(i++, val);
+  } while(!is.fail() && !is.eof() && i < nx);
+
+  if(is.eof() && i < nx){
+    GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
+    is.clear(STD_IOS_BADBIT | is.rdstate());
+    return 1;
+  }
+  return 0;
+}
+
+// No need to specialize the write method.
+#endif
 
 
 
@@ -288,29 +291,31 @@ GARealBlendCrossover(const GAGenome& p1, const GAGenome& p2,
 }
 
 
-// These must be included _after_ the instantiations because some compilers get
-// all wigged out about the declaration/specialization order.  Note that some
-// compilers require a syntax different than others when forcing the 
+
+
+
+// force instantiations of this genome type.
+//
+// These must be included _after_ the specializations because some compilers
+// get all wigged out about the declaration/specialization order.  Note that
+// some compilers require a syntax different than others when forcing the 
 // instantiation (i.e. GNU wants the 'template class', borland does not).
-#ifndef USE_AUTO_INST
-#include <RhoGA/GAAllele.cxx>
-#include <RhoGA/GA1DArrayGenome.cxx>
+#ifndef GALIB_USE_AUTO_INST
+#include <RhoGA/GAAllele.C>
+#include <RhoGA/GA1DArrayGenome.C>
 
 #if defined(__BORLANDC__)
-GAAlleleSet<float>;
-GAAlleleSetCore<float>;
-GAAlleleSetArray<float>;
-
-GAArray<float>;
-GA1DArrayGenome<float>;
-GA1DArrayAlleleGenome<float>;
+#define GALIB_REALGENOME_TEMPLATE_PREFACE
 #else
-template class GAAlleleSet<float>;
-template class GAAlleleSetCore<float>;
-template class GAAlleleSetArray<float>;
-
-template class GAArray<float>;
-template class GA1DArrayGenome<float>;
-template class GA1DArrayAlleleGenome<float>;
+#define GALIB_REALGENOME_TEMPLATE_PREFACE template class
 #endif
+
+GALIB_REALGENOME_TEMPLATE_PREFACE GAAlleleSet<float>;
+GALIB_REALGENOME_TEMPLATE_PREFACE GAAlleleSetCore<float>;
+GALIB_REALGENOME_TEMPLATE_PREFACE GAAlleleSetArray<float>;
+
+GALIB_REALGENOME_TEMPLATE_PREFACE GAArray<float>;
+GALIB_REALGENOME_TEMPLATE_PREFACE GA1DArrayGenome<float>;
+GALIB_REALGENOME_TEMPLATE_PREFACE GA1DArrayAlleleGenome<float>;
+
 #endif

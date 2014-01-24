@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/gatypes.h,v 1.1.1.1 2001-05-04 16:14:29 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   gatypes.h
   mbwall 29apr95

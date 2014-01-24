@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GA1DBinStrGenome.cxx,v 1.2 2001-12-17 17:54:39 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   binstr1.C
   mbwall 19apr95
@@ -130,13 +130,13 @@ GA1DBinaryStringGenome::resize(int l)
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 // We read data from a stream as a series of 1's and 0's.  We want a continuous
 // stream (ie no spaces) but if there are spaces then we can handle them.  We
 // ignore all whitespace.  We ignore anything that is not a digit.  If it is a
 // zero then we set to zero.  Anything else is a 1.
 int
-GA1DBinaryStringGenome::read(std::istream & is)
+GA1DBinaryStringGenome::read(STD_ISTREAM & is)
 {
   static char c;
   unsigned int i=0;
@@ -150,7 +150,7 @@ GA1DBinaryStringGenome::read(std::istream & is)
 
   if(is.eof() && i < nx){
     GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
-    is.clear(ios::badbit | is.rdstate());
+    is.clear(STD_IOS_BADBIT | is.rdstate());
     return 1;
   }
 
@@ -161,7 +161,7 @@ GA1DBinaryStringGenome::read(std::istream & is)
 // When we write the data to a stream we do it without any spaces.  Also, there
 // is no newline at the end of the stream of digits.
 int
-GA1DBinaryStringGenome::write(std::ostream & os) const
+GA1DBinaryStringGenome::write(STD_OSTREAM & os) const
 {
   for(unsigned int i=0; i<nx; i++)
     os << gene(i);

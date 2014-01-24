@@ -1,5 +1,67 @@
 release notes for GAlib
 
+2.4.6 January 2005
+-------------------------------------------------------------------------------
+Updated tspview and gaview graphic examples in the examples/graphic directory.
+These now build cleanly out-of-the-box on linux (and other) unix systems that
+have X windows.  The options for building with MOTIF widget sets (still) work
+and are now the default.  Try running tspview with two different genetic 
+algorithms to see how differently they behave.  For example:
+
+  tspview ga 1           (generational)
+  tspview ga 2           (crowding)
+  tspview ga 3           (simple)
+
+will give you three different windows.  Run them to see how generational,
+simple, and crowding algorithms differ.  Note that the crowding algorithm
+will find all of the (equally good) optimal solutions.
+
+Updated macros in gaconfig.h to have fewer clashes with other libraries.
+
+Much improved out-of-the-box behavior with various recent compilers, including
+gcc3 and vcpp7.  Added options for building on macosx with gcc2 and gcc3.
+The library is now up-to-date with respect to: gcc2, gcc3, vcpp6, vcpp7, xlC,
+aCC, CC, BCC55 (that is all the compilers I have with which to test).
+
+Split the windows makefiles into two, one for vcpp and one for borland.  The
+make syntax is simply too incompatible to keep them in a single file (for now
+anyway, until I find a source for the arcane behaviors of each one).  Still
+to come is complete makefile support for building shared libraries - sorry,
+but for now you have to do that on your own.
+
+All galib random number generators have been change to garan* in order to avoid
+naming conflicts with other libraries.  There is still only one rng at a time
+and no run-time modification of the rng is possible (that is coming with 3.0).
+
+Better inclusion of GARealGenome and GAStringGenome files for specializations.
+the new method accommodates gcc3 premature instantiation quirks and makes the
+code that uses the genomes slightly less cryptic.  See ex21.C to see how this
+is done.
+
+There is now a file called std_stream.h in the ga directory.  this file takes
+care of the differences between various iostream naming requirements.  Some
+platforms require std for the namespace, some do not.  Some require use of
+<iostream.h>, others require simply <iostream>.  When you create your own code
+that uses GAlib, you do not need to use the macros from std_stream.h, but they
+are used in the examples so that the example code will build in any 
+environment, regardless of its use of streams.
+
+The macros for controlling use of streams are now easier to understand and use.
+
+Fixed bug in GASelector::update that could cause memory corruption (thanks to
+Giovanni Sartoni for finding this one).  Added assertions to expose any other
+end-of-array problems in the selector algorithms.
+
+Use local copy of score when calculating population statistics just in case the
+genome scores change on each invocation of the score method.
+
+The seed can now be remembered by each genetic algorithm (or passed on the fly
+as before).  Only the GABaseGA class remembers the seed - derived GA classes 
+do nothing with it right now.  This is so that existing behavior will not be 
+changed.  Then next major release will include persistance and use of seeds
+within the genetic algorithms.
+
+
 2.4.5
 February 2000
 -------------------------------------------------------------------------------

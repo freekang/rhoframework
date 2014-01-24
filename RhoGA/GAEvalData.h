@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAEvalData.h,v 1.1.1.1 2001-05-04 16:14:55 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   eval.h
   mbwall 3dec95

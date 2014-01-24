@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAStringGenome.h,v 1.1.1.1 2001-05-04 16:14:21 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   string.h
   mbwall 25feb95
@@ -18,6 +18,13 @@ typedef GAAlleleSet<char> GACharacterAlleleSet;
 typedef GAAlleleSetArray<char> GAStringAlleleSetArray;
 
 typedef GA1DArrayAlleleGenome<char> GAStringGenome;
+
+// in one (and only one) place in the code that uses the string genome, you 
+// should define INSTANTIATE_STRING_GENOME in order to force the specialization
+// for this genome.
+#if defined(INSTANTIATE_STRING_GENOME)
+#include <RhoGA/GAStringGenome.C>
+#endif
 
 inline void GAStringUniformInitializer(GAGenome& g){
   GA1DArrayAlleleGenome<char>::UniformInitializer(g);

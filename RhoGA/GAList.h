@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAList.h,v 1.1.1.1 2001-05-04 16:13:02 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   listtmpl.h
   mbwall 25feb95
@@ -190,7 +190,7 @@ private:
   friend class GAList<T>;	// do I need to do this?
 };
 
-#ifdef USE_BORLAND_INST
+#ifdef GALIB_USE_BORLAND_INST
 #include <RhoGA/GAList.cxx>
 #endif
 

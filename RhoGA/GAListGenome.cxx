@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAListGenome.cxx,v 1.2 2001-12-17 17:57:48 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   list.C
   mbwall 25feb95
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <RhoGA/GAListGenome.h>
 #include <RhoGA/GAMask.h>
+#include <RhoGA/garandom.h>
 
 template <class T> int 
 GAListIsHole(const GAListGenome<T>&, const GAListGenome<T>&, int, int, int);
@@ -73,21 +74,21 @@ GAListGenome<T>::copy(const GAGenome & orig){
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 // Traverse the list (breadth-first) and dump the contents as best we can to
 // the stream.  We don't try to write the contents of the nodes - we simply 
 // write a . for each node in the list.
 template <class T> int
-GAListGenome<T>::write(std::ostream & os) const 
+GAListGenome<T>::write(STD_OSTREAM & os) const 
 {
   os << "node       next       prev       contents\n";
-  if(!hd) return 0;;
-  os.width(10); os << hd << " ";
-  os.width(10); os << hd->next << " ";
-  os.width(10); os << hd->prev << " ";
-  os.width(10); os << &(DYN_CAST(GANode<T>*, hd)->contents) << "\n";
+  if(!this->hd) return 0;;
+  os.width(10); os << this->hd << " ";
+  os.width(10); os << this->hd->next << " ";
+  os.width(10); os << this->hd->prev << " ";
+  os.width(10); os << &(DYN_CAST(GANode<T>*, this->hd)->contents) << "\n";
 
-  for(GANodeBASE * tmp=hd->next; tmp && tmp != hd; tmp=tmp->next){
+  for(GANodeBASE * tmp=this->hd->next; tmp && tmp != this->hd; tmp=tmp->next){
     os.width(10); os << tmp << " ";
     os.width(10); os << tmp->next << " ";
     os.width(10); os << tmp->prev << " ";
@@ -109,7 +110,7 @@ GAListGenome<T>::equal(const GAGenome & c) const
 {
   if(this == &c) return 1;
   const GAListGenome<T> & b = DYN_CAST(const GAListGenome<T>&, c);
-  if(size() != b.size()) return 0;
+  if(this->size() != b.size()) return 0;
 
   GAListIter<T> iterA(*this), iterB(b);
   T *tmpA = iterA.head(), *tmpB = iterB.head();

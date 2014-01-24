@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GADCrowdingGA.cxx,v 1.1.1.1 2001-05-04 16:14:47 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   gadcrowdingga.C
   mbwall 29mar99

@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAArray.h,v 1.1.1.1 2001-05-04 16:13:21 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   arraytmpl.h
   mbwall 22apr95

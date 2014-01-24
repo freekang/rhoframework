@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/ga.h,v 1.1.1.1 2001-05-04 16:14:26 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   ga.h
   mbwall 28jul94
@@ -155,24 +155,24 @@ one copy of the genome type you want to use.
 #include <RhoGA/GASStateGA.h>
 #include <RhoGA/GAIncGA.h>
 #include <RhoGA/GADemeGA.h>
-#ifndef NO_TEMPLATES
 #include <RhoGA/GADCrowdingGA.h>
-#endif
 
-// Here we include the headers for all of the various genome types.  We do 
-// *not* include the headers for template specializations.  This prevents
-// unnecessary instantiations of template objects.
+// Here we include the headers for all of the various genome types.
 #include <RhoGA/GA1DBinStrGenome.h>
 #include <RhoGA/GA2DBinStrGenome.h>
 #include <RhoGA/GA3DBinStrGenome.h>
 #include <RhoGA/GABin2DecGenome.h>
 
-#ifndef NO_TEMPLATES
+#ifndef GALIB_USE_NO_TEMPLATES
 #include <RhoGA/GA1DArrayGenome.h>
 #include <RhoGA/GA2DArrayGenome.h>
 #include <RhoGA/GA3DArrayGenome.h>
 #include <RhoGA/GAListGenome.h>
 #include <RhoGA/GATreeGenome.h>
+
+// We do *not* include the headers for template specializations.  This prevents
+// unnecessary instantiations of template objects which causes grief to some
+// compilers.
 //#include <RhoGA/GAStringGenome.h>
 //#include <RhoGA/GARealGenome.h>
 #endif

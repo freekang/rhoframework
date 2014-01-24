@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/gabincvt.h,v 1.1.1.1 2001-05-04 16:14:03 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   bincvt.h
   mbwall 29jun95

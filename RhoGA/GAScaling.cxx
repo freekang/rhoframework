@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAScaling.cxx,v 1.1.1.1 2001-05-04 16:14:07 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   scaling.C
   mbwall 10aug94

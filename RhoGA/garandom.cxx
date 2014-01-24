@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/garandom.cxx,v 1.1.1.1 2001-05-04 16:14:02 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   random.C
   mbwall 5sep95
@@ -17,7 +17,7 @@ static void bitseed(unsigned int seed=1);
 
 // If the machine has multiple processes, use the PID to help make the random
 // number generator seed more random.
-#if defined(USE_PID)
+#if defined(GALIB_USE_PID)
 #include <unistd.h>
 #define _GA_PID * getpid()
 #else
@@ -28,17 +28,17 @@ static void bitseed(unsigned int seed=1);
 // the library.
 const char*
 GAGetRNG() {
-#if defined(USE_RAN1)
+#if defined(GALIB_USE_RAN1)
   return "RAN1";
-#elif defined(USE_RAN2)
+#elif defined(GALIB_USE_RAN2)
   return "RAN2";
-#elif defined(USE_RAN3)
+#elif defined(GALIB_USE_RAN3)
   return "RAN3";
-#elif defined(USE_RAND)
+#elif defined(GALIB_USE_RAND)
   return "RAND";
-#elif defined(USE_RANDOM)
+#elif defined(GALIB_USE_RANDOM)
   return "RANDOM";
-#elif defined(USE_RAND48)
+#elif defined(GALIB_USE_RAND48)
   return "RAND48";
 #else
   return "UNKNOWN";
@@ -67,7 +67,7 @@ GARandomSeed(unsigned int s) {
     unsigned long int tmp;
     while(seed == 0) {
       tmp = time(NULL) _GA_PID;
-      for(unsigned int i=0; i<BITS_IN_WORD*sizeof(unsigned int); i++)
+      for(unsigned int i=0; i<GALIB_BITS_IN_WORD*sizeof(unsigned int); i++)
 	seed += (tmp & (1 << i));
     }
     _GA_RND_SEED (seed); 
@@ -187,7 +187,7 @@ GARandomBit() {
 // you don't call it more than about 10^8 times, so for any long GA runs you'd
 // better use something with a longer period.
 
-#if defined(USE_RAN1)
+#if defined(GALIB_USE_RAN1)
 
 #define IA 16807L
 #define IM 2147483647L
@@ -204,7 +204,7 @@ static long iv[NTAB];
 static long idum=0;
 
 void
-sran1(unsigned int seed) {
+gasran1(unsigned int seed) {
   int j;
   long k;
 
@@ -220,7 +220,7 @@ sran1(unsigned int seed) {
   iy=iv[0];
 }
 
-float ran1() {
+float garan1() {
   int j;
   long k;
   float temp;
@@ -256,7 +256,7 @@ float ran1() {
 // function to set the seed.  If you reset the seed then you re-initialize the
 // sequence.
 
-#if defined(USE_RAN2)
+#if defined(GALIB_USE_RAN2)
 
 #define IM1 2147483563L
 #define IM2 2147483399L
@@ -279,7 +279,7 @@ static long iv[NTAB];
 static long idum=0;
 
 void 
-sran2(unsigned int seed) {
+gasran2(unsigned int seed) {
   int j;
   long k;
 
@@ -297,7 +297,7 @@ sran2(unsigned int seed) {
 }
 
 float
-ran2() {
+garan2() {
   int j;
   long k;
   float temp;
@@ -334,7 +334,7 @@ ran2() {
 #endif
 
 
-#if defined(USE_RAN3)
+#if defined(GALIB_USE_RAN3)
 
 // The ran3 pseudo-random number generator.  It is *not* linear congruential.
 
@@ -347,7 +347,7 @@ static int inext,inextp;
 static long ma[56];
 
 void 
-sran3(unsigned int seed) {
+gasran3(unsigned int seed) {
   long idum = seed;
   long mj,mk;
   int i,ii,k;
@@ -373,7 +373,7 @@ sran3(unsigned int seed) {
 }
 
 float 
-ran3() {
+garan3() {
   long mj;
   int i,ii,k;
   

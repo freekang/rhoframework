@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GANode.h,v 1.3 2002-02-01 03:50:39 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   node.h
   mbwall 25nov94
@@ -11,6 +11,7 @@
 #define _ga_node_h_
 
 #include <RhoGA/gaconfig.h>
+#include <RhoGA/std_stream.h>
 
 /* ----------------------------------------------------------------------------
  GANodeBASE
@@ -29,8 +30,8 @@ struct GANodeBASE {
 };
 
 
-#ifndef NO_STREAMS
-inline ostream & operator<<(ostream & os, GANodeBASE & arg){
+#ifdef GALIB_USE_STREAMS
+inline STD_OSTREAM & operator<<(STD_OSTREAM & os, GANodeBASE & arg){
   os << "  node:   " << &arg << "\n";
   os << "  next:   " << arg.next << "\n";
   os << "  prev:   " << arg.prev << "\n";
@@ -77,8 +78,8 @@ struct GANode : public GANodeBASE {
   T & operator()(const T & t){contents = t; return contents;}
 };
 
-#ifndef NO_STREAMS
-template <class T> ostream & operator<<(ostream & os, GANode<T> & arg){
+#ifdef GALIB_USE_STREAMS
+template <class T> STD_OSTREAM & operator<<(STD_OSTREAM & os, GANode<T> & arg){
   os << "  node:   " << &arg << "\n";
   os << "  next:   " << arg.next << "\n";
   os << "  prev:   " << arg.prev << "\n";

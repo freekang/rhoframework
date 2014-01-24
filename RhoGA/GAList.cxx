@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAList.cxx,v 1.1.1.1 2001-05-04 16:14:42 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   listtmpl.C
   mbwall 25feb95

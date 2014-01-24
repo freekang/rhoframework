@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GABin2DecGenome.cxx,v 1.2 2001-12-17 17:57:10 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   bin2dec.C
   mbwall 19apr95
@@ -262,11 +262,11 @@ GABin2DecGenome::phenotype(unsigned int n, float val)
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 // Read the incoming data as a list of phenotype values.  It would be nice to
 // do this either as binary or decimal read, but oh well...  not much need.
 int
-GABin2DecGenome::read(std::istream & is)
+GABin2DecGenome::read(STD_ISTREAM & is)
 {
   float value;
   for(unsigned int i=0; i<phenotypes().nPhenotypes(); i++){
@@ -279,7 +279,7 @@ GABin2DecGenome::read(std::istream & is)
 
 
 int
-GABin2DecGenome::write(std::ostream & os) const 
+GABin2DecGenome::write(STD_OSTREAM & os) const 
 {
   for(unsigned int i=0; i<phenotypes().nPhenotypes(); i++)
     os << phenotype(i) << " ";

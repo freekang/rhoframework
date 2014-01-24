@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GABinStr.h,v 1.1.1.1 2001-05-04 16:13:12 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   binstr.h
   mbwall 30jun95

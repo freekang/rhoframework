@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GABaseGA.h,v 1.3 2002-02-01 03:50:35 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   gabase.h
   mbwall 28jul94
@@ -10,8 +10,6 @@
 #ifndef _ga_gabase_h_
 #define _ga_gabase_h_
 
-#include <stdio.h>
-#include <string.h>
 #include <RhoGA/gaconfig.h>
 #include <RhoGA/gaid.h>
 #include <RhoGA/GAParameter.h>
@@ -64,7 +62,8 @@
 #define gaSNnMigration           "nmig"
 #define gaNminimaxi              "minimaxi"
 #define gaSNminimaxi             "mm"
-
+#define gaNseed                  "seed"
+#define gaSNseed                  "seed"
 
 extern int   gaDefNumGen;
 extern float gaDefPConv;
@@ -82,6 +81,7 @@ extern int   gaDefSelectScores;
 extern int   gaDefMiniMaxi;
 extern GABoolean gaDefDivFlag;
 extern GABoolean gaDefElitism;
+extern int   gaDefSeed;
 
 
 
@@ -137,11 +137,11 @@ public:
     while(!done()){step();} 
     if(stats.flushFrequency() > 0) stats.flushScores();
   }
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
   virtual int write(const char*) const {return 0;}
-  virtual int write(ostream&) const {return 0;}
+  virtual int write(STD_OSTREAM &) const {return 0;}
   virtual int read(const char*){return 0;}
-  virtual int read(istream&){return 0;}
+  virtual int read(STD_ISTREAM &){return 0;}
 #endif
 
   void * userData() const {return ud;}
@@ -152,9 +152,9 @@ public:
   const GAParameterList& parameters() const { return params; }
   const GAParameterList& parameters(const GAParameterList&);
   const GAParameterList& parameters(int&, char **, GABoolean flag=gaFalse);
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
   const GAParameterList& parameters(const char* filename, GABoolean f=gaFalse);
-  const GAParameterList& parameters(istream&, GABoolean flag=gaFalse);
+  const GAParameterList& parameters(STD_ISTREAM &, GABoolean flag=gaFalse);
 #endif
   virtual int get(const char*, void*) const;
   virtual int setptr(const char*, const void*);
@@ -239,6 +239,7 @@ protected:
   Terminator cf;		// function for determining done-ness
   void * ud;			// pointer to user data structure
 
+  int d_seed;
   unsigned int ngen;
   unsigned int nconv;
   float pconv;

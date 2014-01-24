@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GA2DArrayGenome.h,v 1.3 2002-02-01 03:50:32 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   array2.h
   mbwall 25feb95
@@ -50,17 +50,22 @@ public:
   virtual GAGenome * clone(GAGenome::CloneMethod flag=CONTENTS) const;
   virtual void copy(const GAGenome & chrom);
 
-#ifndef NO_STREAMS
-  virtual int read(istream & is);
-  virtual int write (ostream & os) const;
+#ifdef GALIB_USE_STREAMS
+  virtual int read(STD_ISTREAM & is);
+  virtual int write (STD_OSTREAM & os) const;
 #endif
 
   virtual int equal(const GAGenome & c) const;
 
-  const T & gene(unsigned int x, unsigned int y) const {return a[y*nx+x]; }
+  const T & gene(unsigned int x, unsigned int y) const {
+    return this->a[y*nx+x]; 
+  }
   T & gene(unsigned int x, unsigned int y, const T & value) {
-    if(a[y*nx+x] != value){a[y*nx+x] = value; _evaluated = gaFalse;}
-    return a[y*nx+x];
+    if(this->a[y*nx+x] != value) {
+      this->a[y*nx+x] = value; 
+      _evaluated = gaFalse;
+    }
+    return this->a[y*nx+x];
   }
   int width() const {return nx;}
   int width(int w){resize(w, ny); return nx;}
@@ -121,12 +126,12 @@ public:
   GA2DArrayAlleleGenome<T>& operator=(const T array [])
     { GA2DArrayGenome<T>::operator=(array); return *this; }
   virtual ~GA2DArrayAlleleGenome();
-  virtual GAGenome * clone(GAGenome::CloneMethod flag=CONTENTS) const;
+  virtual GAGenome * clone(GAGenome::CloneMethod flag=GAGenome::CONTENTS) const;
   virtual void copy(const GAGenome &);
 
-#ifndef NO_STREAMS
-  virtual int read(istream& is);
-  virtual int write (ostream& os) const ;
+#ifdef GALIB_USE_STREAMS
+  virtual int read(STD_ISTREAM & is);
+  virtual int write (STD_OSTREAM & os) const ;
 #endif
 
   int equal(const GAGenome & c) const ;
@@ -141,7 +146,7 @@ protected:
 };
 
 
-#ifdef USE_BORLAND_INST
+#ifdef GALIB_USE_BORLAND_INST
 #include <RhoGA/GA2DArrayGenome.cxx>
 #endif
 

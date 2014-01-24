@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAParameter.cxx,v 1.2 2001-12-17 17:58:13 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   parameters.C
   mbwall 28jul94
@@ -292,12 +292,12 @@ GAParameterList::operator()(const char* name){
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 // Dump the parameters to the specified stream.  Just name-value pairs with a
 // tab delimiter and newline separating pairs.
 //   If there is an error, return 1, otherwise return 0.
 int
-GAParameterList::write(std::ostream& os) const {
+GAParameterList::write(STD_OSTREAM& os) const {
   for(unsigned int i=0; i<n; i++){
     int ival;
     float fval;
@@ -345,7 +345,7 @@ GAParameterList::write(std::ostream& os) const {
 
 int
 GAParameterList::write(const char* filename) const {
-  ofstream outfile(filename, (ios::out | ios::trunc));
+  STD_OFSTREAM outfile(filename, (STD_IOS_OUT | STD_IOS_TRUNC));
 // should be done this way, but SGI systems (and others?) don't do it right...
 //  if(! outfile.is_open()){
   if(outfile.fail()){
@@ -376,7 +376,7 @@ GAParameterList::write(const char* filename) const {
 // There's no global list to tell us what type things are, and we don't assume.
 //   We don't allow setting pointers using this method.
 int
-GAParameterList::read(std::istream& is, GABoolean flag){
+GAParameterList::read(STD_ISTREAM& is, GABoolean flag){
   int nfound = 0;
   if(n == 0) return nfound;
 
@@ -482,7 +482,7 @@ GAParameterList::read(std::istream& is, GABoolean flag){
     strcat(_gaerrbuf2, "be sure there is a newline at end of the file");
     GAErr(GA_LOC, "GAParameterList", "read", _gaerrbuf1, _gaerrbuf2);
 
-    is.clear(ios::badbit | is.rdstate());
+    is.clear(STD_IOS_BADBIT | is.rdstate());
   }
 
   return nfound;
@@ -490,7 +490,7 @@ GAParameterList::read(std::istream& is, GABoolean flag){
 
 int
 GAParameterList::read(const char* filename, GABoolean flag){
-  ifstream infile(filename, ios::in);
+  STD_IFSTREAM infile(filename, STD_IOS_IN);
   if(!infile){
     GAErr(GA_LOC, "GAParameterList", "read", gaErrReadError, filename);
     return 1;

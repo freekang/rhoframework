@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAPopulation.cxx,v 1.2 2001-12-17 17:58:29 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   population.C
   mbwall 11aug94
@@ -12,7 +12,11 @@
 #include <RhoGA/garandom.h>
 #include <RhoGA/GABaseGA.h>		// for the sake of flaky g++ compiler
 
-#define NOMINMAX		// for the sake of window, thanks nick wienholt
+// windows is promiscuous in its use of min/max, and that causes us grief.  so
+// turn of the use of min/max macros in this file.   thanks nick wienholt
+#if !defined(NOMINMAX)
+#define NOMINMAX
+#endif
 
 // This is the default population initializer.  It simply calls the initializer
 // for each member of the population.  Then we touch the population to tell it
@@ -370,9 +374,10 @@ GAPopulation::statistics(GABoolean flag) const {
 
     unsigned int i;
     for(i=1; i<n; i++){
-      tmpsum += rind[i]->score();
-      This->rawMax = GAMax(rawMax, rind[i]->score());
-      This->rawMin = GAMin(rawMin, rind[i]->score());
+      float scr = rind[i]->score();
+      tmpsum += scr;
+      This->rawMax = GAMax(rawMax, scr);
+      This->rawMin = GAMin(rawMin, scr);
     }
     float tmpave = tmpsum / n;
     This->rawAve = tmpave;
@@ -717,9 +722,9 @@ GAPopulation::geneticAlgorithm(GAGeneticAlgorithm& g){
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 void 
-GAPopulation::write(std::ostream & os, SortBasis basis) const {
+GAPopulation::write(STD_OSTREAM & os, SortBasis basis) const {
   for(unsigned int i=0; i<n; i++){
     if(basis == RAW)
       os << *rind[i] << "\n";

@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAPopulation.h,v 1.3 2002-02-01 03:50:41 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   population.h
   mbwall 3aug94
@@ -173,9 +173,9 @@ public:
   GAGenome * replace(GAGenome * newgenome, GAGenome * oldgenome);
   void destroy(int w=WORST, SortBasis b=RAW) { delete remove(w,b); }
 
-#ifndef NO_STREAMS
-  virtual void read(istream &){}
-  virtual void write (ostream & os, SortBasis basis=RAW) const;
+#ifdef GALIB_USE_STREAMS
+  virtual void read(STD_ISTREAM &){}
+  virtual void write (STD_OSTREAM & os, SortBasis basis=RAW) const;
 #endif
 
 protected:
@@ -218,10 +218,10 @@ protected:
 
 
 
-#ifndef NO_STREAMS
-inline ostream& operator<< (ostream& os, const GAPopulation & arg)
+#ifdef GALIB_USE_STREAMS
+inline STD_OSTREAM & operator<< (STD_OSTREAM & os, const GAPopulation & arg)
 { arg.write(os); return os; }
-inline istream& operator>> (istream& is, GAPopulation & arg)
+inline STD_ISTREAM & operator>> (STD_ISTREAM & is, GAPopulation & arg)
 { arg.read(is); return is; }
 #endif
 

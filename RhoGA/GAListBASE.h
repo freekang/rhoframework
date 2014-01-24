@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAListBASE.h,v 1.1.1.1 2001-05-04 16:15:02 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   listbase.h
   mbwall 25nov94

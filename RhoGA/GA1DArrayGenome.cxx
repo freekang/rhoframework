@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GA1DArrayGenome.cxx,v 1.2 2001-12-17 17:54:15 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   array1.C
   mbwall 25feb95
@@ -133,14 +133,14 @@ GA1DArrayGenome<T>::resize(int len)
 
   nx = GAArray<T>::size(len);
   _evaluated = gaFalse;
-  return sz;
+  return this->sz;
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 // We don't define this one apriori.  Do it in a specialization.
 template <class T> int
-GA1DArrayGenome<T>::read(std::istream &) {
+GA1DArrayGenome<T>::read(STD_ISTREAM &) {
   GAErr(GA_LOC, className(), "read", gaErrOpUndef);
   return 1;
 }
@@ -149,7 +149,7 @@ GA1DArrayGenome<T>::read(std::istream &) {
 // When we write the data to a stream we do it with spaces between elements.
 // Also, there is no newline at the end of the stream of digits.
 template <class T> int
-GA1DArrayGenome<T>::write(std::ostream & os) const {
+GA1DArrayGenome<T>::write(STD_OSTREAM & os) const {
   for(unsigned int i=0; i<nx; i++)
     os << gene(i) << " ";
   return 0;
@@ -222,10 +222,10 @@ GA1DArrayGenome<T>(length, f, u){
   aset = new GAAlleleSet<T>[1];
   aset[0] = s;
 
-  initializer(DEFAULT_1DARRAY_ALLELE_INITIALIZER);
-  mutator(DEFAULT_1DARRAY_ALLELE_MUTATOR);
-  comparator(DEFAULT_1DARRAY_ALLELE_COMPARATOR);
-  crossover(DEFAULT_1DARRAY_ALLELE_CROSSOVER);
+  initializer(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_INITIALIZER);
+  mutator(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_MUTATOR);
+  comparator(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_COMPARATOR);
+  crossover(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_CROSSOVER);
 }
 
 template <class T> 
@@ -238,10 +238,10 @@ GA1DArrayGenome<T>(sa.size(), f, u) {
   for(int i=0; i<naset; i++)
     aset[i] = sa.set(i);
 
-  initializer(DEFAULT_1DARRAY_ALLELE_INITIALIZER);
-  mutator(DEFAULT_1DARRAY_ALLELE_MUTATOR);
-  comparator(DEFAULT_1DARRAY_ALLELE_COMPARATOR);
-  crossover(DEFAULT_1DARRAY_ALLELE_CROSSOVER);
+  initializer(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_INITIALIZER);
+  mutator(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_MUTATOR);
+  comparator(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_COMPARATOR);
+  crossover(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_CROSSOVER);
 }
 
 
@@ -295,11 +295,11 @@ GA1DArrayAlleleGenome<T>::copy(const GAGenome& orig){
 // value (ie one of our alleles).
 template <class T> int
 GA1DArrayAlleleGenome<T>::resize(int len){
-  unsigned int oldx = nx;
+  unsigned int oldx = this->nx;
   GA1DArrayGenome<T>::resize(len);
-  if(nx > oldx){
-    for(unsigned int i=oldx; i<nx; i++)
-      a[i] = aset[i % naset].allele();
+  if(this->nx > oldx){
+    for(unsigned int i=oldx; i<this->nx; i++)
+      this->a[i] = aset[i % naset].allele();
   }
   return len;
 }
@@ -307,14 +307,14 @@ GA1DArrayAlleleGenome<T>::resize(int len){
 
 
 // Define these so they can easily be specialized as needed.
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 template <class T> int
-GA1DArrayAlleleGenome<T>::read(std::istream& is){
+GA1DArrayAlleleGenome<T>::read(STD_ISTREAM& is){
   return GA1DArrayGenome<T>::read(is);
 }
 
 template <class T> int
-GA1DArrayAlleleGenome<T>::write(std::ostream& os) const {
+GA1DArrayAlleleGenome<T>::write(STD_OSTREAM& os) const {
   return GA1DArrayGenome<T>::write(os);
 }
 #endif

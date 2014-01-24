@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GARealGenome.h,v 1.1.1.1 2001-05-04 16:14:41 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   real.h
   mbwall 25feb95
@@ -20,6 +20,15 @@ typedef GAAlleleSetArray<float> GARealAlleleSetArray;
 
 typedef GA1DArrayAlleleGenome<float> GARealGenome;
 
+int GARealGaussianMutator(GAGenome &, float);
+
+// in one (and only one) place in the code that uses the string genome, you 
+// should define INSTANTIATE_STRING_GENOME in order to force the specialization
+// for this genome.
+#if defined(INSTANTIATE_REAL_GENOME)
+#include <RhoGA/GARealGenome.C>
+#endif
+
 inline void GARealUniformInitializer(GAGenome& g){
   GA1DArrayAlleleGenome<float>::UniformInitializer(g);
 }
@@ -33,7 +42,6 @@ inline int GARealUniformMutator(GAGenome& g, float pmut){
 inline int GARealSwapMutator(GAGenome& g, float pmut){
   return GA1DArrayGenome<float>::SwapMutator(g, pmut);
 }
-int GARealGaussianMutator(GAGenome &, float);
 
 
 inline int GARealUniformCrossover(const GAGenome& a, const GAGenome& b,

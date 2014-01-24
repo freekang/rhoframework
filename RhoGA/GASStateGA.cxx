@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GASStateGA.cxx,v 1.1.1.1 2001-05-04 16:14:43 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   gasteadystate.C
   mbwall 28jul94

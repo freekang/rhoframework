@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GATree.cxx,v 1.1.1.1 2001-05-04 16:13:11 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   treetmpl.C
   mbwall 25feb95

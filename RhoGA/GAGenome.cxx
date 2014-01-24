@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAGenome.cxx,v 1.1.1.1 2001-05-04 16:14:12 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   genome.C
   mbwall 19apr95

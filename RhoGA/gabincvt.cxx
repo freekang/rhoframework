@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/gabincvt.cxx,v 1.1.1.1 2001-05-04 16:14:38 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   bincvt.C
   mbwall 29jun95
@@ -25,7 +25,7 @@
 #endif
 
 // Define the number of bits based on the builtin type
-#define _GA_MAX_BITS          (int)(BITS_IN_WORD*sizeof(BITBASE))
+#define _GA_MAX_BITS          (int)(GALIB_BITS_IN_WORD*sizeof(GALIB_BITBASE))
 
 
 // These are publicly available, but we don't want to advertise them.  They are
@@ -113,7 +113,8 @@ _GAEncodeBase(unsigned int base, unsigned BITBASE val,
   int status = 0;
   if(c < 0) return 1;		// if this happens we should post an error
 				// it means we didn't get a perfect encoding
-  binstr[c] = val % base;
+  unsigned BITBASE modval = val % base;
+  binstr[c] = STA_CAST(GABit,modval);  // the case is ok since module is small
   unsigned BITBASE quotient = val / base;
   if(quotient) status = _GAEncodeBase(base, quotient, binstr, n, c-1);
   return status;
@@ -258,7 +259,7 @@ GAGrayDecode(float& value, const GABit* bits, unsigned int nbits,
     if(bits[nbits-i-1]) gray |= (1<<i);
 
   unsigned BITBASE bin = gray;
-  for(unsigned int j=1; j<BITS_IN_WORD*sizeof(BITBASE); j<<=1)
+  for(unsigned int j=1; j<GALIB_BITS_IN_WORD*sizeof(GALIB_BITBASE); j<<=1)
     bin ^= (bin>>j);
 
   unsigned BITBASE maxint = 1<<nbits;

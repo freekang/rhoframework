@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAGenome.h,v 1.3 2002-02-01 03:50:37 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   genome.h
   mbwall 28jul94
@@ -14,12 +14,11 @@ it should operate on the data.  See comments below for further details.
 #ifndef _ga_genome_h_
 #define _ga_genome_h_
 
-#include <stdlib.h>
-#include <string.h>
 #include <RhoGA/gaid.h>
 #include <RhoGA/gaconfig.h>
 #include <RhoGA/gaerror.h>
 #include <RhoGA/GAEvalData.h>
+#include <RhoGA/std_stream.h>
 
 class GAGeneticAlgorithm;
 class GAGenome;
@@ -206,10 +205,10 @@ public:
   virtual GAGenome* clone(CloneMethod flag=CONTENTS) const;
   virtual void copy(const GAGenome &);
 
-#ifndef NO_STREAMS
-  virtual int read(istream &)
+#ifdef GALIB_USE_STREAMS
+  virtual int read(STD_ISTREAM &)
     { GAErr(GA_LOC, className(), "read", gaErrOpUndef); return 0; }
-  virtual int write(ostream &) const
+  virtual int write(STD_OSTREAM &) const
     { GAErr(GA_LOC, className(), "write", gaErrOpUndef); return 0; }
 #endif
 
@@ -274,10 +273,10 @@ protected:
 };
 
 
-#ifndef NO_STREAMS
-inline ostream& operator<< (ostream& os, const GAGenome& genome)
+#ifdef GALIB_USE_STREAMS
+inline STD_OSTREAM & operator<< (STD_OSTREAM& os, const GAGenome& genome)
 { genome.write(os); return(os); }
-inline istream& operator>> (istream& is, GAGenome& genome)
+inline STD_ISTREAM & operator>> (STD_ISTREAM & is, GAGenome& genome)
 { genome.read(is); return(is); }
 #endif
 

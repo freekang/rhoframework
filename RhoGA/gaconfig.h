@@ -1,10 +1,10 @@
-// $Header: /cvs/hep/rho/RhoGA/gaconfig.h,v 1.1.1.1 2001-05-04 16:12:58 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   config.h
   mbwall 27jun95
   Copyright (c) 1995-1996 Massachusetts Institute of Technology
                           all rights reserved
-  Copyright (c) 1998-1999 Matthew Wall
+  Copyright (c) 1998-2005 Matthew Wall
                           all rights reserved
 ---------------------------------------------------------------------------- */
 #ifndef _ga_config_h_
@@ -14,45 +14,68 @@
 /* ----------------------------------------------------------------------------
 PREPROCESSOR DIRECTIVES
 
-  Here are the preprocessor directives that the library understands.  If you 
-are using a makefile, then put these in the line with the DEFINES macro.  For
-example, to define the NO_TEMPLATES and USE_BORLAND_INST options then do
+  Here are the preprocessor directives that the library understands.
 
-       DEFINES = -DNO_TEMPLATES -DUSE_BORLAND_INST
-
-In MacOS or DOS, use your development environment's preprocessor directives 
-option to set the values.  Beware that if you use the makefile or your 
-development environment to do the defines then someone may compile a program
-later on that does not use the same defines you used to compile the library.
-  For best results (ie smallest chance of error), modify this header file 
-rather than using the makefile or development environment.
   Some of these are already set up for the OSes with which I am familiar.  See
 below for the pre-defined sets.  If you come up with a compiler/platform 
 configuration that is not listed here, please send it to me so that i can 
 incorporate it into the code base.
 
+  GALIB_USE_ANSI_HEADERS
 
-   USE_ANSI_STREAMS   For systems/environments in which streams are not desired
-   USE_OLD_STREAMS    and/or required.  Turns off errors and all of the read/
-   NO_STREAMS         write routines for the classes when neither of these is
-		      defined or when NO_STREAMS is defined.
+                      Some operating systems/compilers have old-style headers
+                      (e.g. <iostream.h>) while others have new-school
+		      headers (e.g. <iostream>).  The default is to use
+		      ANSI headers.  If you are using an older compiler,
+		      make sure this variable is not defined.
 
-   USE_CPP_CASTS      If your compiler supports RTTI, or if you turn on
+  GALIB_USE_NAMED_TEMPLATES
+  GALIB_USE_EMPTY_TEMPLATES
+  GALIB_USE_COMP_OPERATOR_TEMPLATES
+
+                      Some older compilers do not require strict, ansi template
+		      definitions.  And some compilers require slightly 
+		      different ways of specifying templates.  And to make it
+		      even more complicated, some depend very much on the type
+		      of instantiation method that is defined.  Sigh.
+
+  GALIB_USE_STD_NAMESPACE
+
+                      Some platforms need to explicitly use the std namespace
+		      when referring to streams and other std components, but
+		      others do not.
+
+  GALIB_USE_STREAMS
+
+                      For systems/environments in which streams are not desired
+                      and/or required.  If this is not defined, it turns off 
+                      errors and all of the read/write routines for the 
+                      classes.
+
+  GALIB_USE_RTTI
+
+                      If your compiler supports RTTI, or if you turn on
                       the RTTI abilities of your compiler, then define this
                       macro.  Without RTTI, if improper casts are made,
 		      things will die horribly rather than dropping out in an
 		      RTTI-induced exception.
 
-   USE_PID            Define this if the system has a getpid function that
-                      returns something sane and useful.
+  GALIB_USE_PID
 
-   NO_TEMPLATES       For compilers that do not do templates.  The only type
+                     Define this if the system has a getpid function that
+                     returns something sane and useful.
+
+  GALIB_USE_NO_TEMPLATES
+
+                      For compilers that do not do templates.  The only type
                       of genome available when this is defined is binary 
                       string and any derived classes.  list, tree, and array 
 		      all use templates.  You can still use the template code,
 		      but you will have to hack it yourself to make it work.
 
-   USE_BORLAND_INST   For compilers that use the Borland instantiation model.
+  GALIB_USE_BORLAND_INST
+
+                      For compilers that use the Borland instantiation model.
                       These compilers expect all of the template code to be
 		      in the header file.  The Cfront model, on the other
                       hand, expects source files with names similar to the
@@ -64,37 +87,44 @@ incorporate it into the code base.
 		      at the end of the header file for all headers that
 		      contain templates.
 
-   USE_AUTO_INST      For compilers that do not do automatic instantiation
+  GALIB_USE_AUTO_INST
+
+                      For compilers that do not do automatic instantiation
                       (such as g++ version 2.6.8) you will have to force
                       instantiations.  When this flag is not defined, GAlib
 		      forces an instantiation of all of the template classes
 		      that it uses (such as real genome and string genome).
 
-   USE_GALIB_AS_LIB      For windows shared libraries, one must define whether
-   USE_GALIB_AS_DLL      static member data are imported or exported.  You 
+  GALIB_HAVE_NOT_ASSERT
+
+                      Some platforms do not have assert.  So for those
+		      platforms we define our own simple version of it.
+
+
+
+  USE_GALIB_AS_LIB       For windows shared libraries, one must define whether
+  USE_GALIB_AS_DLL       static member data are imported or exported.  You 
                          define one or the other of these, but not both.  The
 		  	 default is USE_GALIB_AS_LIB (if you define neither).
 			
-   COMPILE_GALIB_AS_LIB  If you are compiling the dome library, define one of
-   COMPILE_GLAIB_AS_DLL  these to indicate the windows exports.  The default
+  COMPILE_GALIB_AS_LIB   If you are compiling the dome library, define one of
+  COMPILE_GLAIB_AS_DLL   these to indicate the windows exports.  The default
                          is USE_GALIB_AS_LIB (if you define neither).
  
+                
    
-   
-             
-   
-   USE_RAN1           These specify which random number function to use.  Only
-   USE_RAN2           one of these may be specified.  You may have to tweak 
-   USE_RAN3           random.h a bit as well (these functions are not defined 
-   USE_RAND 	      the same way on each platform).  For best results, use
-   USE_RANDOM	      ran2 or ran3 (performance is slightly slower than most
-   USE_RAND48	      system RNGs, but you'll get better results).
+  GALIB_USE_RAN1      These specify which random number function to use.  Only
+  GALIB_USE_RAN2      one of these may be specified.  You may have to tweak 
+  GALIB_USE_RAN3      random.h a bit as well (these functions are not defined 
+  GALIB_USE_RAND      the same way on each platform).  For best results, use
+  GALIB_USE_RANDOM    ran2 or ran3 (performance is slightly slower than most
+  GALIB_USE_RAND48    system RNGs, but you'll get better results).
 
                       If you want to use another random number generator you
                       must hack random.h directly (see the comments in that
                       file).
 
-   BITBASE            The built-in type to use for bit conversions.  This 
+  GALIB_BITBASE       The built-in type to use for bit conversions.  This 
                       should be set to the type of the largest integer that
                       your system supports.  If you have long long int then
                       use it.  If you don't plan to use more than 16 or 32
@@ -105,20 +135,107 @@ incorporate it into the code base.
 		      maximum number of bits you can use to represent a
 		      decimal number in the binary-to-decimal genomes.
 
-   BITS_IN_WORD       How many bits are in a word?  For many systems, a word is
+  GALIB_BITS_IN_WORD  How many bits are in a word?  For many systems, a word is
                       a char and is 8 bits long.
 
 ---------------------------------------------------------------------------- */
 
-// By default, we use the old streams library.  
-#if !defined(USE_OLD_STREAMS) && \
-    !defined(USE_ANSI_STREAMS) && \
-    !defined(NO_STREAMS)
-#define USE_ANSI_STREAMS
+// This is a bare-bones os-cpu-compiler detection with no dependencies on any
+// other header files or macros.  We try to detect everything based on what we
+// will get by default from the compilers.  The result of this is three macros
+//   GALIB_OS
+//   GALIB_CPU
+//   GALIB_COMPILER
+
+// determine the operating system
+#if defined(__linux__)
+#define GALIB_OS "linux"
+#elif defined(__sgi)
+#define GALIB_OS "irix"
+#elif defined(WIN32)
+#define GALIB_OS "win32"
+#elif defined(sun)
+#define GALIB_OS "solaris"
+#elif defined(__APPLE__) && defined(__MACH__) && defined(__ppc__)
+#define GALIB_OS "macosx"
+#elif defined(macintosh)
+#define GALIB_OS "macos"
+#elif defined(HPUX10)
+#define GALIB_OS "hpux10"
+#elif defined(HPUX11)
+#define GALIB_OS "hpux11"
+#elif defined(_AIX) || defined(AIX)
+#define GALIB_OS "aix"
+#else
+#define GALIB_OS "unknown"
 #endif
 
+// determine the cpu
+#if defined(__INTEL__) || defined(__i386__) || \
+    defined(__x86__) || defined(_M_IX86)
+#define GALIB_CPU "i386"
+#elif defined(__POWERPC__) || defined(__PPC__) || \
+      defined(__powerpc__) || defined(__ppc__) || \
+      defined(_POWER)
+#define GALIB_CPU "ppc"
+#elif defined(__m68k__)
+#define GALIB_CPU "68k"
+#elif defined(__sgi)
+#define GALIB_CPU "mips"
+#elif defined(sparc) || defined(__sparc__)
+#define GALIB_CPU "sparc"
+#elif defined(__HP_aCC)
+#define GALIB_CPU "hppa"
+#else
+#define GALIB_CPU "unknown"
+#endif
 
-
+// determine the compiler
+#if defined(__GNUG__) || defined(__GNUC__)
+#if __GNUC__ == 4
+#define GALIB_COMPILER "gcc4"
+#elif __GNUC__ == 3
+#define GALIB_COMPILER "gcc3"
+#elif __GNUC__ == 2
+#define GALIB_COMPILER "gcc2"
+#else
+#define GALIB_COMPILER "gcc"
+#endif
+#elif defined(__BORLANDC__)
+#if __BORLANDC__ < 0x500
+#define GALIB_COMPILER "bcc4"
+#elif __BORLANDC__ < 0x530
+#define GALIB_COMPILER "bcc52"
+#elif __BORLANDC__ < 0x540
+#define GALIB_COMPILER "bcc53"
+#elif __BORLANDC__ < 0x550
+#define GALIB_COMPILER "bcc54"
+#elif __BORLANDC__ < 0x560
+#define GALIB_COMPILER "bcc55"
+#else
+#define GALIB_COMPILER "bcc"
+#endif
+#elif defined(__WATCOMC__)
+#define GALIB_COMPILER "watcom"
+#elif defined(_MIPS_SIM)
+#define GALIB_COMPILER "mipscc"
+#elif defined(__MWERKS__)
+#define GALIB_COMPILER "mwerks"
+#elif defined(_MSC_VER)
+#if _MSC_VER == 1300
+#define GALIB_COMPILER "vcpp7"
+#elif _MSC_VER == 1200
+#define GALIB_COMPILER "vcpp6"
+#else
+#define GALIB_COMPILER "vcpp"
+#endif
+#elif defined(__HP_aCC)
+#define GALIB_COMPILER "acc"
+#elif defined(__IBMCPP__)
+#define GALIB_COMPILER "xlc"
+#else
+#define GALIB_COMPILER "unknown"
+#endif
 
 
 
@@ -132,11 +249,12 @@ incorporate it into the code base.
 // Metrowerks' Codewarrior for MacOS, PalmOS, or Win32 (I have not tested CW
 // on other platforms yet).
 #if defined(__MWERKS__)
+#define GALIB_USE_STREAMS
+#define GALIB_USE_BORLAND_INST
+#define GALIB_USE_AUTO_INST
 #if __option(RTTI)
-#define USE_CPP_CASTS
+#define GALIB_USE_RTTI
 #endif
-#define USE_BORLAND_INST
-#define USE_AUTO_INST
 
 
 // ----------------------------------------------------------------------------
@@ -144,7 +262,16 @@ incorporate it into the code base.
 // so if you want to use any of the template components of GAlib then you will
 // probably have to do some hacking to get things to work.
 #elif defined(__SC__)
-#define USE_BORLAND_INST
+#define GALIB_USE_STREAMS
+#define GALIB_USE_BORLAND_INST
+
+
+// ----------------------------------------------------------------------------
+// THINK for mac
+#elif defined(THINK_C)
+#define GALIB_USE_STREAMS
+#define GALIB_USE_BORLAND_INST
+#define GALIB_USE_COMP_OPERATOR_TEMPLATES
 
 
 // ----------------------------------------------------------------------------
@@ -163,61 +290,152 @@ incorporate it into the code base.
 // don't do so well in a 16-bit OS.
 //  Use the randtest example to check GAlib's RNG after you compile everything.
 #elif defined(__BORLANDC__)
-#define USE_RAND		// comment this if you're using a 32-bit OS
-//#define USE_BORLAND_INST
+//#define GALIB_USE_RAND	// comment this if you're using a 32-bit OS
+#define GALIB_USE_RTTI
+#define GALIB_USE_BORLAND_INST
+#define GALIB_USE_STREAMS
+//#define GALIB_USE_PID
+#define GALIB_USE_EMPTY_TEMPLATES
+//#define GALIB_USE_ANSI_HEADERS
+//#define GALIB_USE_STD_NAMESPACE
+//#define GALIB_USE_COMP_OPERATOR_TEMPLATES
+
+//#pragma warning (disable : 8027)    // switch statements are not inlined
+//#pragma warning (disable : 8004)    // unused variable warnings are lame
 
 
 // ----------------------------------------------------------------------------
 // MicroSoft's Visual C++ programming environment.
+//
+// this has been test with:
+//   vcpp6 (12.00.8804)
+//   vcpp6 (12.00.8168)
+//   vcpp7 (13.00.9466)
+//   vcpp7 (13.10.3077)
+//
 #elif defined(_MSC_VER)
+// visual studio uses the borland model of template instantiation.
+#define GALIB_USE_BORLAND_INST
+// let visual studio do its own instantations, so by default do not force them.
+#define GALIB_USE_AUTO_INST
+// use ansi headers with vcpp7.  it is a good idea to use them in vcpp6 as well
+// but some vcpp6 apps are built with non-ansi headers, in which case you 
+// should build with the non-ansi headers so that you do not cross the streams.
+#define GALIB_USE_ANSI_HEADERS
+// beware of using streams in an MFC application.  many nasties lurk therein...
+#define GALIB_USE_STREAMS
+// we default to using std things in the std namespace, but depending on the
+// version of vcpp you are using and depending on the libraries with which you
+// will use GAlib, you might have to turn this one off.
+#define GALIB_USE_STD_NAMESPACE
+// use the pid only on winnt and derivatives.  win95/98/ME do not have it.
+// this requires unistd.h, which you may or may not have (depending on the 
+// way that you installed the compiler).
+//#define GALIB_USE_PID
+// GAlib behaves much better in unknown conditions when rtti is enabled, but
+// you might have to disable it, depending on the linkage and compilation 
+// options you need for other components you are using with GAlib.
 #if defined(_CPPRTTI)
-#define USE_CPP_CASTS
+#define GALIB_USE_RTTI
+#else
+#undef GALIB_USE_RTTI
 #endif
-#define USE_BORLAND_INST
-#define USE_AUTO_INST
-//#pragma warning (disable : 4244)
-#pragma warning (disable : 4305)    // ignore double-to-float warnings
+
+// there are many warnings from vcpp, many of which we can safely ignore.
+//#pragma warning (disable : 4244)    // int-to-float warnings
+#pragma warning (disable : 4305)    // double-to-float warnings
 #pragma warning (disable : 4355)    // allow us to use this in constructors
-//#pragma warning (disable : 4250)    // ignore the dominated multiple inherits
+//#pragma warning (disable : 4250)    // dominated multiple inherits
 
 
 // ----------------------------------------------------------------------------
-// for g++ 2.6.3 - 2.8.x
-// if you use 2.8.x then you might want uncomment the USE_CPP_CASTS macro
-// since 2.8 will do rtti without requiring the -frtti flag.
+// GNU compiler
+//
+// there are some subtle differences in the way the gcc compiler handles
+// templates from one version to another.  the latest versions are much more
+// strictly adherant to the c++ standards, although you can relax that with
+// the permissive option.  we try to build this library without the use of the
+// permissive option.
+//
+// there are significant changes between the 3.3 and 3.4 releases of gcc.  and
+// of course there are major differences between the 2.x and 3.x versions, but
+// those affect us mostly with respect to the use of the std libraries.
 #elif defined(__GNUG__)
-#define USE_PID
-#define USE_BORLAND_INST
-//#define USE_CPP_CASTS
+#define GALIB_USE_RTTI
+#define GALIB_USE_BORLAND_INST
+#define GALIB_USE_STREAMS
+#define GALIB_USE_PID
+#define GALIB_USE_EMPTY_TEMPLATES
+#define GALIB_NEED_INSTANTIATION_PREFIX
+#if __GNUC__ > 2
+#define GALIB_USE_ANSI_HEADERS
+#define GALIB_USE_STD_NAMESPACE
+#define GALIB_USE_COMP_OPERATOR_TEMPLATES
+#endif
 
 
 // ----------------------------------------------------------------------------
 // irix 5.3 and irix 6.x
 #elif defined(__sgi)
-#define USE_PID
+#define GALIB_USE_STREAMS
+#define GALIB_USE_PID
+
 #include <sgidefs.h>
 #if (_MIPS_SIM == _MIPS_SIM_NABI32)
-#define USE_CPP_CASTS
+#define GALIB_USE_RTTI
+#define GALIB_USE_AUTO_INST
+#define GALIB_USE_BORLAND_INST
 #elif (_MIPS_SIM == _MIPS_SIM_ABI64)
-#define USE_CPP_CASTS
+#define GALIB_USE_RTTI
 #elif (_MIPS_SIM == _MIPS_SIM_ABI32)
-#define USE_AUTO_INST
+#define GALIB_USE_AUTO_INST
 #endif
+
+
+// ----------------------------------------------------------------------------
+// IBM visual age c++ compiler
+#elif defined(__IBMCPP__)
+// the -qrtti option turns rtti on and off, but i do not know the
+// corresponding preprocessor directive to sense it.
+#define GALIB_USE_RTTI
+#define GALIB_USE_BORLAND_INST
+#define GALIB_USE_AUTO_INST
+#define GALIB_USE_ANSI_HEADERS
+#define GALIB_USE_STREAMS
+#define GALIB_USE_STD_NAMESPACE
+#define GALIB_USE_PID
+#define GALIB_USE_NAMED_TEMPLATES
+
+
+// ----------------------------------------------------------------------------
+// HP aCC compiler
+#elif defined(__HP_aCC)
+#define GALIB_USE_RTTI
+#define GALIB_USE_BORLAND_INST
+#define GALIB_USE_AUTO_INST
+//#define GALIB_USE_ANSI_HEADERS
+#define GALIB_USE_STREAMS
+//#define GALIB_USE_STD_NAMESPACE
+#define GALIB_USE_PID
+
+//#pragma disable warning 829 // do not care about string literal conversions
 
 
 // ----------------------------------------------------------------------------
 // This is an unknown/untested platform and/or compiler.  The defaults below 
 // might work for you, but then again, they might not.  You may have to adjust
 // the values of the macros until everything works properly.  Comment out the
-// #error directive to allow things to compile properly.  Eventually I'll get
-// areound to replacing this with autoconf...
+// #error directive to allow things to compile properly.
 #else
 #error   Unknown/untested compiler/operating system!  Check these settings!
 
-#define USE_CPP_CASTS
-#define USE_BORLAND_INST
-#define USE_AUTO_INST
-#define USE_PID
+#define GALIB_USE_RTTI
+#define GALIB_USE_BORLAND_INST
+#define GALIB_USE_AUTO_INST
+#define GALIB_USE_ANSI_HEADERS
+#define GALIB_USE_STREAMS
+#define GALIB_USE_STD_NAMESPACE
+#define GALIB_USE_PID
 #endif
 
 
@@ -230,56 +448,60 @@ incorporate it into the code base.
 
 
 
-
-
-
-
-// Use the right streams library based on which streams macro was defined.
-#if defined(USE_OLD_STREAMS)
-#include <iostream.h>
-#include <fstream.h>
-
-#elif defined(USE_ANSI_STREAMS)
-#include <iostream>
-#include <fstream>
-
-// i'm terribly sorry to do this, but it is the easiest way for me to get
-// things to work properly with vcpp.
-using namespace std;
-
+// deal with assertions.  at some point we might want a proper definition of 
+// assert here for platforms that do not have it.
+#if defined(GALIB_HAVE_NOT_ASSERT)
+#include <stdlib.h>
+#define assert(x) \
+  { \
+    if(! (x)) { \
+      fprintf(stderr, "assertion failed at line %d in file %s\n", \
+	      __LINE__, __FILE__); \
+      exit(1); \
+    } \
+  }
 #else
-#ifndef NO_STREAMS
-#define NO_STREAMS
+#include <assert.h>
 #endif
+
+
+// some compilers use one syntax, others use a different syntax.
+#if defined(GALIB_NEED_INSTANTIATION_PREFIX)
+#define GALIB_INSTANTIATION_PREFIX template class
+#else
+#define GALIB_INSTANTIATION_PREFIX
 #endif
 
 
 // If no RNG has been selected, use the ran2 generator by default
-#if !defined(USE_RAND) && !defined(USE_RANDOM) && \
-    !defined(USE_RAND48) && !defined(USE_RAN2) && !defined(USE_RAN3)
-#define USE_RAN2
+#if !defined(GALIB_USE_RAND) && \
+    !defined(GALIB_USE_RANDOM) && \
+    !defined(GALIB_USE_RAND48) && \
+    !defined(GALIB_USE_RAN2) && \
+    !defined(GALIB_USE_RAN3)
+#define GALIB_USE_RAN2
 #endif
 
 
 // This defines how many bits are in a single word on your system.  Most 
 // systems have a word length of 8 bits.
-#ifndef BITS_IN_WORD
-#define BITS_IN_WORD 8
+#ifndef GALIB_BITS_IN_WORD
+#define GALIB_BITS_IN_WORD 8
 #endif
 
 
 // Use this to set the maximum number of bits that can be used in binary-to-
 // decimal conversions.  You should make this type the largest integer type 
 // that your system supports.
-#ifndef BITBASE
-#define BITBASE long int
+#ifndef GALIB_BITBASE
+#define GALIB_BITBASE long int
 #endif
 
 
 // If the system/compiler understands C++ casts, then we use them.  Otherwise
 // we default to the C-style casts.  The macros make explicit the fact that we
 // are doing casts.
-#if defined(USE_CPP_CASTS)
+#if defined(GALIB_USE_RTTI)
 #define DYN_CAST(type,x) (dynamic_cast<type>(x))
 #define CON_CAST(type,x) (const_cast<type>(x))
 #define STA_CAST(type,x) (static_cast<type>(x))
@@ -308,18 +530,10 @@ using namespace std;
 
 
 /* ----------------------------------------------------------------------------
-SPACE SAVERS and DEFAULT OPERATORS
+DEFAULT OPERATORS
 
   These directives determine which operators will be used by default for each
 of the objects in GAlib.
-  If space is limited, you may want to compile the library with only the parts
-that you need (compiling in DOS comes to mind).  Your compiler should do this
-automatically for you (ie only use the parts that you use).  If not, then 
-comment out the chunks in the files you're not going to use (for example, 
-comment out the ordered initializer in the list object).
-  To disable a certain type of genome, simply don't compile its source file.
-The following directives are defined so that you can trim out the parts of the
-genetic algorithm objects that are not in separate files.
 ---------------------------------------------------------------------------- */
 // scaling schemes
 #define USE_LINEAR_SCALING           1

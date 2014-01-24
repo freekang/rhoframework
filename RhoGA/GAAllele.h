@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAAllele.h,v 1.3 2002-02-01 03:50:35 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   allele.h
   mbwall 21mar95
@@ -13,9 +13,9 @@ imply the specific implementation of the container class).
 #ifndef _ga_allele_h_
 #define _ga_allele_h_
 
-#include <string.h>
 #include <RhoGA/gaconfig.h>
 #include <RhoGA/garandom.h>
+#include <RhoGA/std_stream.h>
 
 class GAAllele {
 public:
@@ -85,11 +85,11 @@ public:
 };
 
 
-// mods for symantec C++ on macOS.  thanks to RJG 15jul96
-#if defined(THINK_C) || __powerc
+#if defined(GALIB_USE_COMP_OPERATOR_TEMPLATES)
 template <class T> int operator==(const T &, const T &);
 template <class T> int operator!=(const T &, const T &);
 #endif
+
 
 template <class T>
 class GAAlleleSet {
@@ -135,15 +135,18 @@ public:
   GAAllele::BoundType upperBoundType() const {return core->upperb;}
   GAAllele::Type type() const {return core->type;}
 
-#ifndef NO_STREAMS
-  int read(istream &);
-  int write(ostream & os) const;
+#ifdef GALIB_USE_STREAMS
+  int read(STD_ISTREAM &);
+  int write(STD_OSTREAM & os) const;
 #endif
 
-#if defined(THINK_C) || __powerc
+#if defined(THINK_C)
   friend operator==(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
   friend operator!=(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
-#elif defined(__GNUG__)
+#elif defined(GALIB_USE_EMPTY_TEMPLATES)
+  friend int operator==<>(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
+  friend int operator!=<>(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
+#elif defined(GALIB_USE_NAMED_TEMPLATES)
   friend int operator==<T>(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
   friend int operator!=<T>(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
 #else
@@ -185,19 +188,18 @@ protected:
 };
 
 
-
-#ifndef NO_STREAMS
-template <class T> ostream& 
-operator<< (ostream& os, const GAAlleleSet<T> & arg)
+#ifdef GALIB_USE_STREAMS
+template <class T> STD_OSTREAM & 
+operator<< (STD_OSTREAM & os, const GAAlleleSet<T> & arg)
 { arg.write(os); return os; }
-template <class T> istream& 
-operator>> (istream& is, GAAlleleSet<T> & arg)
+template <class T> STD_ISTREAM & 
+operator>> (STD_ISTREAM & is, GAAlleleSet<T> & arg)
 { arg.read(is); return is; }
 #endif
 
 
 
-#ifdef USE_BORLAND_INST
+#ifdef GALIB_USE_BORLAND_INST
 #include <RhoGA/GAAllele.cxx>
 #endif
 

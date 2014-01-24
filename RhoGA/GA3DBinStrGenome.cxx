@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GA3DBinStrGenome.cxx,v 1.2 2001-12-17 17:56:08 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   binstr3.C
   mbwall 19apr95
@@ -183,9 +183,9 @@ GA3DBinaryStringGenome::resize(int w, int h, int d)
   return sz;
 }
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 int
-GA3DBinaryStringGenome::read(std::istream & is)
+GA3DBinaryStringGenome::read(STD_ISTREAM & is)
 {
   static char c;
   unsigned int i=0, j=0, k=0;
@@ -211,7 +211,7 @@ GA3DBinaryStringGenome::read(std::istream & is)
       (j < ny && j != 0) ||	// didn't get some lines
       (i < nx && i != 0))){	// didn't get some lines
     GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
-    is.clear(ios::badbit | is.rdstate());
+    is.clear(STD_IOS_BADBIT | is.rdstate());
     return 1;
   }
 
@@ -222,7 +222,7 @@ GA3DBinaryStringGenome::read(std::istream & is)
 // Dump the bits to the stream with a newline at the end of each row and 
 // another at the end of each layer.  No newline at the end of the block.
 int
-GA3DBinaryStringGenome::write(std::ostream & os) const 
+GA3DBinaryStringGenome::write(STD_OSTREAM & os) const 
 {
   for(unsigned int k=0; k<nz; k++){
     for(unsigned int j=0; j<ny; j++){

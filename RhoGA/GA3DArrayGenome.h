@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GA3DArrayGenome.h,v 1.3 2002-02-01 03:50:33 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   array3.h
   mbwall 25feb95
@@ -52,22 +52,22 @@ public:
   virtual GAGenome * clone(GAGenome::CloneMethod flag=CONTENTS) const;
   virtual void copy(const GAGenome & chrom);
 
-#ifndef NO_STREAMS
-  virtual int read(istream & is=cin);
-  virtual int write (ostream & os=cout) const;
+#ifdef GALIB_USE_STREAMS
+  virtual int read(STD_ISTREAM &);
+  virtual int write (STD_OSTREAM &) const;
 #endif
 
   virtual int equal(const GAGenome & c) const;
 
   const T & gene(unsigned int x, unsigned int y, unsigned int z) const {
-    return a[z*ny*nx + y*nx + x];
+    return this->a[z*ny*nx + y*nx + x];
   }
   T & gene(unsigned int x, unsigned int y, unsigned int z, const T & value){
-    if(a[z*ny*nx + y*nx + x] != value){ 
+    if(this->a[z*ny*nx + y*nx + x] != value){ 
       _evaluated = gaFalse;
-      a[z*ny*nx + y*nx + x] = value;
+      this->a[z*ny*nx + y*nx + x] = value;
     }
-    return a[z*ny*nx + y*nx + x];
+    return this->a[z*ny*nx + y*nx + x];
   }
   int width() const {return nx;}
   int width(int w){resize(w, ny, nz); return nx;}
@@ -136,12 +136,12 @@ public:
   GA3DArrayAlleleGenome<T>& operator=(const T array [])
     {GA3DArrayGenome<T>::operator=(array); return *this;}
   virtual ~GA3DArrayAlleleGenome();
-  virtual GAGenome * clone(GAGenome::CloneMethod flag=CONTENTS) const;
+  virtual GAGenome * clone(GAGenome::CloneMethod flag=GAGenome::CONTENTS) const;
   virtual void copy(const GAGenome &);
 
-#ifndef NO_STREAMS
-  virtual int read(istream& is);
-  virtual int write (ostream& os) const;
+#ifdef GALIB_USE_STREAMS
+  virtual int read(STD_ISTREAM & is);
+  virtual int write (STD_OSTREAM & os) const;
 #endif
 
   virtual int equal(const GAGenome & c) const ;
@@ -156,7 +156,7 @@ protected:
 };
 
 
-#ifdef USE_BORLAND_INST
+#ifdef GALIB_USE_BORLAND_INST
 #include <RhoGA/GA3DArrayGenome.cxx>
 #endif
 

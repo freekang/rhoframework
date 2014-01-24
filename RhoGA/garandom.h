@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/garandom.h,v 1.1.1.1 2001-05-04 16:13:46 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   random.h
   mbwall 29jun95
@@ -64,28 +64,28 @@ then these functions scale the distribution to that deviation.  Mean is still 0
 // genetic algorithms the random number generator is the bottleneck, so this
 // isn't totally useless musing...
 
-#if defined(USE_RAN1) || defined(USE_RAN2) || defined(USE_RAN3)
+#if defined(GALIB_USE_RAN1) || defined(GALIB_USE_RAN2) || defined(GALIB_USE_RAN3)
 
-#if defined(USE_RAN1)
+#if defined(GALIB_USE_RAN1)
 
-#define _GA_RND             ran1
-#define _GA_RND_SEED        sran1
-void sran1(unsigned int seed=1);
-float ran1();
+#define _GA_RND             garan1
+#define _GA_RND_SEED        gasran1
+void gasran1(unsigned int seed=1);
+float garan1();
 
-#elif defined(USE_RAN2)
+#elif defined(GALIB_USE_RAN2)
 
-#define _GA_RND             ran2
-#define _GA_RND_SEED        sran2
-void sran2(unsigned int seed=1);
-float ran2();
+#define _GA_RND             garan2
+#define _GA_RND_SEED        gasran2
+void gasran2(unsigned int seed=1);
+float garan2();
 
-#elif defined(USE_RAN3)
+#elif defined(GALIB_USE_RAN3)
 
-#define _GA_RND             ran3
-#define _GA_RND_SEED        sran3
-void sran3(unsigned int seed=1);
-float ran3();
+#define _GA_RND             garan3
+#define _GA_RND_SEED        gasran3
+void gasran3(unsigned int seed=1);
+float garan3();
 
 #endif
 
@@ -106,7 +106,7 @@ inline float GARandomFloat(float low, float high){
   float val=high-low; val*=_GA_RND(); return val+low;
 }
 
-#elif defined(USE_RAND) || defined(USE_RANDOM) || defined(USE_RAND48)
+#elif defined(GALIB_USE_RAND) || defined(GALIB_USE_RANDOM) || defined(GALIB_USE_RAND48)
 
 #error  It is usually a bad idea to use the system randum number generator!
 #error  Be sure that your system generator works properly, then comment
@@ -115,13 +115,13 @@ inline float GARandomFloat(float low, float high){
 #include <math.h>
 #include <limits.h>
 
-#if defined(USE_RANDOM) 
+#if defined(GALIB_USE_RANDOM) 
 
 #define _GA_RND             random
 #define _GA_RND_SEED        srandom
 #define _GA_RND_MAX         LONG_MAX
 
-#elif defined(USE_RAND48)
+#elif defined(GALIB_USE_RAND48)
 
 #define _GA_RND             lrand48
 #define _GA_RND_SEED        srand48

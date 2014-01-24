@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAStringGenome.cxx,v 1.2 2001-12-17 17:59:31 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   string.C
   mbwall 21mar95
@@ -10,11 +10,12 @@
 ---------------------------------------------------------------------------- */
 #include <RhoGA/GAStringGenome.h>
 
-const char * 
+template <> const char * 
 GA1DArrayAlleleGenome<char>::className() const {return "GAStringGenome";}
-int GA1DArrayAlleleGenome<char>::classID() const {return GAID::StringGenome;}
+template <> int 
+GA1DArrayAlleleGenome<char>::classID() const {return GAID::StringGenome;}
 
-GA1DArrayAlleleGenome<char>::
+template <> GA1DArrayAlleleGenome<char>::
 GA1DArrayAlleleGenome(unsigned int length, const GAAlleleSet<char> & s,
 		      GAGenome::Evaluator f, void * u) :
 GA1DArrayGenome<char>(length, f, u){
@@ -28,7 +29,7 @@ GA1DArrayGenome<char>(length, f, u){
   crossover(DEFAULT_STRING_CROSSOVER);
 }
 
-GA1DArrayAlleleGenome<char>::
+template <> GA1DArrayAlleleGenome<char>::
 GA1DArrayAlleleGenome(const GAAlleleSetArray<char> & sa,
 		      GAGenome::Evaluator f, void * u) :
 GA1DArrayGenome<char>(sa.size(), f, u){
@@ -43,16 +44,17 @@ GA1DArrayGenome<char>(sa.size(), f, u){
   crossover(DEFAULT_STRING_CROSSOVER);
 }
 
+template <> 
 GA1DArrayAlleleGenome<char>::~GA1DArrayAlleleGenome(){
   delete [] aset;
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 // The read specialization takes in each character whether it is whitespace or
 // not and stuffs it into the genome.  This is unlike the default array read.
-int
-GA1DArrayAlleleGenome<char>::read(std::istream & is)
+template <> int
+GA1DArrayAlleleGenome<char>::read(STD_ISTREAM & is)
 {
   unsigned int i=0;
   char c;
@@ -63,7 +65,7 @@ GA1DArrayAlleleGenome<char>::read(std::istream & is)
 
   if(is.eof() && i < nx){
     GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
-    is.clear(ios::badbit | is.rdstate());
+    is.clear(STD_IOS_BADBIT | is.rdstate());
     return 1;
   }
   return 0;
@@ -71,8 +73,8 @@ GA1DArrayAlleleGenome<char>::read(std::istream & is)
 
 // Unlike the base array genome, here when we write out we don't put any
 // whitespace between genes.  No newline at end of it all.
-int
-GA1DArrayAlleleGenome<char>::write(std::ostream & os) const
+template <> int
+GA1DArrayAlleleGenome<char>::write(STD_OSTREAM & os) const
 {
   for(unsigned int i=0; i<nx; i++)
     os << gene(i);
@@ -82,29 +84,28 @@ GA1DArrayAlleleGenome<char>::write(std::ostream & os) const
 
 
 
-// These must be included _after_ the instantiations because some compilers get
-// all wigged out about the declaration/specialization order.  Note that some
-// compilers require a syntax different than others when forcing the 
+// force instantiations of this genome type.
+//
+// These must be included _after_ the specializations because some compilers
+// get all wigged out about the declaration/specialization order.  Note that
+// some compilers require a syntax different than others when forcing the 
 // instantiation (i.e. GNU wants the 'template class', borland does not).
-#ifndef USE_AUTO_INST
-#include <RhoGA/GAAllele.cxx>
-#include <RhoGA/GA1DArrayGenome.cxx>
+#ifndef GALIB_USE_AUTO_INST
+#include <RhoGA/GAAllele.C>
+#include <RhoGA/GA1DArrayGenome.C>
 
 #if defined(__BORLANDC__)
-GAAlleleSet<char>;
-GAAlleleSetCore<char>;
-GAAlleleSetArray<char>;
-
-GAArray<char>;
-GA1DArrayGenome<char>;
-GA1DArrayAlleleGenome<char>;
+#define GALIB_STRINGGENOME_TEMPLATE_PREFACE
 #else
-template class GAAlleleSet<char>;
-template class GAAlleleSetCore<char>;
-template class GAAlleleSetArray<char>;
-
-template class GAArray<char>;
-template class GA1DArrayGenome<char>;
-template class GA1DArrayAlleleGenome<char>;
+#define GALIB_STRINGGENOME_TEMPLATE_PREFACE template class
 #endif
+
+GALIB_STRINGGENOME_TEMPLATE_PREFACE GAAlleleSet<char>;
+GALIB_STRINGGENOME_TEMPLATE_PREFACE GAAlleleSetCore<char>;
+GALIB_STRINGGENOME_TEMPLATE_PREFACE GAAlleleSetArray<char>;
+
+GALIB_STRINGGENOME_TEMPLATE_PREFACE GAArray<char>;
+GALIB_STRINGGENOME_TEMPLATE_PREFACE GA1DArrayGenome<char>;
+GALIB_STRINGGENOME_TEMPLATE_PREFACE GA1DArrayAlleleGenome<char>;
+
 #endif

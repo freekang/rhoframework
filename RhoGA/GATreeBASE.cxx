@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GATreeBASE.cxx,v 1.1.1.1 2001-05-04 16:13:27 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   treebase.C
   mbwall 25nov94

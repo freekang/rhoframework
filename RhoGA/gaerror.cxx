@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/gaerror.cxx,v 1.2 2001-12-17 17:59:52 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   error.C
   mbwall 28jul94
@@ -17,8 +17,8 @@ char _gaerrbuf1[120];
 char _gaerrbuf2[120];
 
 
-#ifndef NO_STREAMS
-static std::ostream *__gaErrStream = &cerr;
+#ifdef GALIB_USE_STREAMS
+static STD_OSTREAM *__gaErrStream = & STD_CERR;
 #endif
 static GABoolean __gaErrFlag = gaTrue;
 static char *__gaErrStr[] = {
@@ -93,7 +93,7 @@ GAErr(const GASourceLocator loc, const char *clss, const char *func,
   }
   sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
   strcat(gaErrMsg, _gaerrbuf1);
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
   if(__gaErrFlag == gaTrue) *__gaErrStream << gaErrMsg;
 #endif
 }
@@ -120,7 +120,7 @@ GAErr(const GASourceLocator loc, const char *clss, const char *func,
   }
   sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
   strcat(gaErrMsg, _gaerrbuf1);
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
   if(__gaErrFlag == gaTrue) *__gaErrStream << gaErrMsg;
 #endif
 }
@@ -145,7 +145,7 @@ GAErr(const GASourceLocator loc, const char *func,
   }
   sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
   strcat(gaErrMsg, _gaerrbuf1);
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
   if(__gaErrFlag == gaTrue) *__gaErrStream << gaErrMsg;
 #endif
 }
@@ -156,9 +156,9 @@ GAReportErrors(GABoolean flag){
   __gaErrFlag = flag;
 }
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 void
-GASetErrorStream(std::ostream& s){
+GASetErrorStream(STD_OSTREAM & s){
   __gaErrStream = &s;
 }
 #endif

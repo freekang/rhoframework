@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GASimpleGA.h,v 1.3 2002-02-01 03:50:42 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   gasimple.h
   mbwall 28jul94
@@ -60,10 +60,10 @@ protected:
 
 
 
-#ifndef NO_STREAMS
-inline ostream& operator<< (ostream& os, GASimpleGA & arg)
+#ifdef GALIB_USE_STREAMS
+inline STD_OSTREAM & operator<< (STD_OSTREAM & os, GASimpleGA & arg)
 { arg.write(os); return(os); }
-inline istream& operator>> (istream& is, GASimpleGA & arg)
+inline STD_ISTREAM & operator>> (STD_ISTREAM & is, GASimpleGA & arg)
 { arg.read(is); return(is); }
 #endif
 

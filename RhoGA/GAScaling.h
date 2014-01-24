@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAScaling.h,v 1.1.1.1 2001-05-04 16:14:06 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   scaling.h
   mbwall 10aug94
@@ -20,7 +20,6 @@ it does know how to update itself, but it must be told when.
 #ifndef _ga_scaling_h_
 #define _ga_scaling_h_
 
-#include <string.h>
 #include <RhoGA/gaconfig.h>
 #include <RhoGA/gaid.h>
 #include <RhoGA/gatypes.h>

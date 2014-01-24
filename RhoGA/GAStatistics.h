@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAStatistics.h,v 1.3 2002-02-01 03:50:43 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   statistics.h
   mbwall 14jul95
@@ -11,7 +11,6 @@
 #ifndef _ga_statistics_h_
 #define _ga_statistics_h_
 
-#include <string.h>
 #include <RhoGA/gatypes.h>
 #include <RhoGA/gaconfig.h>
 #include <RhoGA/GAGenome.h>
@@ -92,11 +91,11 @@ public:
   const GAPopulation & bestPopulation() const { return *boa; }
   const GAGenome & bestIndividual(unsigned int n=0) const;
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
   int scores(const char* filename, int which=NoScores);
-  int scores(ostream& os, int which=NoScores);
+  int scores(STD_OSTREAM & os, int which=NoScores);
   int write(const char* filename) const;
-  int write(ostream& os) const;
+  int write(STD_OSTREAM & os) const;
 #endif
 
 // These should be protected (accessible only to the GA class) but for now they
@@ -202,8 +201,8 @@ inline float GAStatistics::current(int w) const {
 
 
 
-#ifndef NO_STREAMS
-inline ostream& operator<< (ostream& os, const GAStatistics& s)
+#ifdef GALIB_USE_STREAMS
+inline STD_OSTREAM & operator<< (STD_OSTREAM & os, const GAStatistics& s)
 { s.write(os); return os; }
 #endif
 

@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAParameter.h,v 1.3 2002-02-01 03:50:40 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   parameters.h
   mbwall 14jul95
@@ -13,6 +13,7 @@
 
 #include <RhoGA/gaconfig.h>
 #include <RhoGA/gatypes.h>
+#include <RhoGA/std_stream.h>
 
 
 /* ----------------------------------------------------------------------------
@@ -89,11 +90,11 @@ public:
   GAParameter* operator()(const char* name);
   int parse(int& argc, char **argv, GABoolean flag=gaTrue);
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
   int write(const char* filename) const;
-  int write(ostream& os) const;
+  int write(STD_OSTREAM & os) const;
   int read(const char* filename, GABoolean flag=gaTrue);
-  int read(istream& is, GABoolean flag=gaTrue);
+  int read(STD_ISTREAM & is, GABoolean flag=gaTrue);
 #endif
 
 protected:
@@ -103,10 +104,10 @@ protected:
 
 
 
-#ifndef NO_STREAMS
-inline ostream& operator<< (ostream& os, const GAParameterList& plist)
+#ifdef GALIB_USE_STREAMS
+inline STD_OSTREAM & operator<< (STD_OSTREAM &os, const GAParameterList& plist)
 { plist.write(os); return os; }
-inline istream& operator>> (istream& is, GAParameterList& plist)
+inline STD_ISTREAM & operator>> (STD_ISTREAM& is, GAParameterList& plist)
 { plist.read(is); return is; }
 #endif
 

@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/gaerror.h,v 1.3 2002-02-01 03:50:44 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   error.h
   mbwall 7may95
@@ -13,6 +13,7 @@
 
 #include <RhoGA/gatypes.h>
 #include <RhoGA/gaconfig.h>
+#include <RhoGA/std_stream.h>
 
 // This object is for telling us where in the source code an error occurs.
 class GASourceLocator {
@@ -117,10 +118,10 @@ void GAReportErrors(GABoolean flag);
 
 // Provide a mechanism for redirecting the error messages.
 
-#ifdef NO_STREAMS
-inline void GASetErrorStream(){} // dummy function
+#ifdef GALIB_USE_STREAMS
+void GASetErrorStream(STD_OSTREAM &);
 #else
-void GASetErrorStream(ostream&);
+inline void GASetErrorStream(){} // dummy function
 #endif
 
 // This error string contains the text of the most recent error message.  If a

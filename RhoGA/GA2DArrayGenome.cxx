@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GA2DArrayGenome.cxx,v 1.2 2001-12-17 17:55:00 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   array2.C
   mbwall 25feb95
@@ -86,7 +86,7 @@ GA2DArrayGenome<T>::clone(GAGenome::CloneMethod flag) const {
 
 template <class T> int
 GA2DArrayGenome<T>::resize(int w, int h){
-  if(w == STA_CAST(int,nx) && h == STA_CAST(int,ny)) return sz;
+  if(w == STA_CAST(int,nx) && h == STA_CAST(int,ny)) return this->sz;
 
   if(w == GAGenome::ANY_SIZE)
     w = GARandomInt(minX, maxX);
@@ -113,7 +113,7 @@ GA2DArrayGenome<T>::resize(int w, int h){
   if(w < STA_CAST(int,nx)){
     int y=GAMin(STA_CAST(int,ny),h);
     for(int j=0; j<y; j++)
-      move(j*w,j*nx,w);
+      GAArray<T>::move(j*w,j*nx,w);
   }
   GAArray<T>::size(w*h);
   if(w > STA_CAST(int,nx)){		// adjust the existing chunks of bits
@@ -124,20 +124,20 @@ GA2DArrayGenome<T>::resize(int w, int h){
 
   nx = w; ny = h;
   _evaluated = gaFalse;
-  return sz;
+  return this->sz;
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 template <class T> int
-GA2DArrayGenome<T>::read(std::istream &) {
+GA2DArrayGenome<T>::read(STD_ISTREAM &) {
   GAErr(GA_LOC, className(), "read", gaErrOpUndef);
   return 1;
 }
 
 
 template <class T> int
-GA2DArrayGenome<T>::write(std::ostream & os) const 
+GA2DArrayGenome<T>::write(STD_OSTREAM & os) const 
 {
   for(unsigned int j=0; j<ny; j++){
     for(unsigned int i=0; i<nx; i++){
@@ -269,10 +269,10 @@ GA2DArrayGenome<T>(width,height,f,u){
   aset = new GAAlleleSet<T>[1];
   aset[0] = s;
 
-  initializer(DEFAULT_2DARRAY_ALLELE_INITIALIZER);
-  mutator(DEFAULT_2DARRAY_ALLELE_MUTATOR);
-  comparator(DEFAULT_2DARRAY_ALLELE_COMPARATOR);
-  crossover(DEFAULT_2DARRAY_ALLELE_CROSSOVER);
+  initializer(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_INITIALIZER);
+  mutator(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_MUTATOR);
+  comparator(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_COMPARATOR);
+  crossover(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_CROSSOVER);
 }
 
 template <class T> 
@@ -286,10 +286,10 @@ GA2DArrayGenome<T>(width,height, f, u) {
   for(int i=0; i<naset; i++)
     aset[i] = sa.set(i);
 
-  initializer(DEFAULT_2DARRAY_ALLELE_INITIALIZER);
-  mutator(DEFAULT_2DARRAY_ALLELE_MUTATOR);
-  comparator(DEFAULT_2DARRAY_ALLELE_COMPARATOR);
-  crossover(DEFAULT_2DARRAY_ALLELE_CROSSOVER);
+  initializer(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_INITIALIZER);
+  mutator(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_MUTATOR);
+  comparator(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_COMPARATOR);
+  crossover(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_CROSSOVER);
 }
 
 
@@ -335,34 +335,34 @@ GA2DArrayAlleleGenome<T>::copy(const GAGenome& orig){
 
 template <class T> int
 GA2DArrayAlleleGenome<T>::resize(int x, int y){
-  unsigned int oldx = nx;
-  unsigned int oldy = ny;
+  unsigned int oldx = this->nx;
+  unsigned int oldy = this->ny;
   GA2DArrayGenome<T>::resize(x,y);
 
-  if(nx > oldx){		// adjust the existing chunks of bits
-    int y=GAMin(oldy,ny);
+  if(this->nx > oldx){		// adjust the existing chunks of bits
+    int y=GAMin(oldy,this->ny);
     for(int j=y-1; j>=0; j--){
-      for(unsigned int i=oldx; i<nx; i++)
-	a[j*nx+i] = aset[(j*nx+i) % naset].allele();
+      for(unsigned int i=oldx; i<this->nx; i++)
+	this->a[j * this->nx+i] = aset[(j * this->nx+i) % naset].allele();
     }
   }
-  if(ny > oldy){		// change in height is always new bits
-    for(unsigned int i=nx*oldy; i<nx*ny; i++)
-      a[i] = aset[i % naset].allele();
+  if(this->ny > oldy){		// change in height is always new bits
+    for(unsigned int i=this->nx*oldy; i<this->nx * this->ny; i++)
+      this->a[i] = aset[i % naset].allele();
   }
 
-  return sz;
+  return this->sz;
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 template <class T> int
-GA2DArrayAlleleGenome<T>::read(std::istream& is){
+GA2DArrayAlleleGenome<T>::read(STD_ISTREAM& is){
   return GA2DArrayGenome<T>::read(is);
 }
 
 template <class T> int
-GA2DArrayAlleleGenome<T>::write(std::ostream& os) const {
+GA2DArrayAlleleGenome<T>::write(STD_OSTREAM& os) const {
   return GA2DArrayGenome<T>::write(os);
 }
 #endif

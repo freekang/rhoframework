@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GASimpleGA.cxx,v 1.1.1.1 2001-05-04 16:13:31 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   gasimple.C
   mbwall 28jul94

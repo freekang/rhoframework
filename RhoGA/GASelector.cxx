@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GASelector.cxx,v 1.1.1.1 2001-05-04 16:15:01 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   selector.C
   mbwall 10aug94
@@ -85,6 +85,7 @@ GARouletteWheelSelector::select() const {
   lower = 0; upper = pop->size()-1;
   while(upper >= lower){
     i = lower + (upper-lower)/2;
+    assert(i >= 0 && i < n);
     if(psum[i] > cutoff)
       upper = i-1;
     else
@@ -199,6 +200,7 @@ GATournamentSelector::select() const {
   lower = 0; upper = pop->size()-1;
   while(upper >= lower){
     i = lower + (upper-lower)/2;
+    assert(i >= 0 && i < n);
     if(psum[i] > cutoff)
       upper = i-1;
     else
@@ -212,6 +214,7 @@ GATournamentSelector::select() const {
   lower = 0; upper = pop->size()-1;
   while(upper >= lower){
     i = lower + (upper-lower)/2;
+    assert(i >= 0 && i < n);
     if(psum[i] > cutoff)
       upper = i-1;
     else
@@ -298,7 +301,8 @@ GASRSSelector::update() {
 	     + pop->max() + pop->min())/pop->ave();
 	ne = (int)expected;
 	fraction[i] = expected - ne;
-	while(ne > 0){
+	while(ne > 0 && k < (int)n){
+	  assert(k >= 0 && k < (int)n);
 	  choices[k] = i;
 	  k++; ne--;
 	}
@@ -306,6 +310,8 @@ GASRSSelector::update() {
       i=0;
       while(k < pop->size()){
 	if(fraction[i] > 0.0 && GAFlipCoin(fraction[i])){
+	  assert(k >= 0 && k < (int)n);
+	  assert(i >= 0 && i < (int)n);
 	  choices[k] = i;
 	  fraction[i] -= 1.0;
 	  k++;
@@ -338,7 +344,8 @@ GASRSSelector::update() {
 	     + pop->fitmax() + pop->fitmin()) / pop->fitave();
 	ne = (int)expected;
 	fraction[i] = expected - ne;
-	while(ne > 0){
+	while(ne > 0 && k < (int)n){
+	  assert(k >= 0 && k < (int)n);
 	  choices[k] = i;
 	  k++; ne--;
 	}
@@ -351,6 +358,8 @@ GASRSSelector::update() {
 	  flag = 0;
 	}
 	if(fraction[i] > 0.0 && GAFlipCoin(fraction[i])){
+	  assert(k >= 0 && k < (int)n);
+	  assert(i >= 0 && i < (int)n);
 	  choices[k] = i;
 	  fraction[i] -= 1.0;
 	  k++;
@@ -430,7 +439,8 @@ GADSSelector::update() {
 	ne = (int)expected;
 	fraction[i] = expected - ne;
 	
-	while(ne > 0){
+	while(ne > 0 && k < (int)n){
+	  assert(k >= 0 && k < (int)n);
 	  choices[k] = i;
 	  k++; ne--;
 	}
@@ -466,7 +476,8 @@ GADSSelector::update() {
 	ne = (int)expected;
 	fraction[i] = expected - ne;
 	
-	while(ne > 0){
+	while(ne > 0 && k < (int)n){
+	  assert(k >= 0 && k < (int)n);
 	  choices[k] = i;
 	  k++; ne--;
 	}

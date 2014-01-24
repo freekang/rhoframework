@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GA1DArrayGenome.h,v 1.3 2002-02-01 03:50:30 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   array1.h
   mbwall 25feb95
@@ -63,22 +63,22 @@ public:
   GA1DArrayGenome<T>& operator=(const GAGenome& orig)
     {copy(orig); return *this;}
   GA1DArrayGenome<T>& operator=(const T array []) // no err checks!
-    {for(unsigned int i=0; i<sz; i++) gene(i, *(array+i)); return *this;}
+    {for(unsigned int i=0; i<this->sz; i++) gene(i, *(array+i)); return *this;}
   virtual ~GA1DArrayGenome();
   virtual GAGenome *clone(GAGenome::CloneMethod flag=CONTENTS) const;
   virtual void copy(const GAGenome &);
 
-#ifndef NO_STREAMS
-  virtual int read(istream& is);
-  virtual int write (ostream& os) const;
+#ifdef GALIB_USE_STREAMS
+  virtual int read(STD_ISTREAM & is);
+  virtual int write (STD_OSTREAM & os) const;
 #endif
 
   virtual int equal(const GAGenome & c) const ;
 
-  const T & gene(unsigned int x=0) const {return a[x];}
+  const T & gene(unsigned int x=0) const {return this->a[x];}
   T & gene(unsigned int x, const T & value){
-    if(a[x] != value){ a[x] = value; _evaluated = gaFalse;}
-    return a[x];
+    if(this->a[x] != value){ this->a[x] = value; _evaluated = gaFalse;}
+    return this->a[x];
   }
   int length() const {return nx;}
   int length(int x){resize(x); return nx;}
@@ -152,12 +152,12 @@ public:
   GA1DArrayAlleleGenome<T>& operator=(const T array []) // no err checks!
     {GA1DArrayGenome<T>::operator=(array); return *this;}
   virtual ~GA1DArrayAlleleGenome();
-  virtual GAGenome *clone(GAGenome::CloneMethod flag=CONTENTS) const;
+  virtual GAGenome *clone(GAGenome::CloneMethod flag=GAGenome::CONTENTS) const;
   virtual void copy(const GAGenome &);
 
-#ifndef NO_STREAMS
-  virtual int read(istream& is);
-  virtual int write (ostream& os) const;
+#ifdef GALIB_USE_STREAMS
+  virtual int read(STD_ISTREAM & is);
+  virtual int write (STD_OSTREAM & os) const;
 #endif
 
   virtual int equal(const GAGenome & c) const ;
@@ -174,7 +174,7 @@ protected:
 
 
 
-#ifdef USE_BORLAND_INST
+#ifdef GALIB_USE_BORLAND_INST
 #include <RhoGA/GA1DArrayGenome.cxx>
 #endif
 

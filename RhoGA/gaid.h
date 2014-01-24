@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/gaid.h,v 1.1.1.1 2001-05-04 16:13:25 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   id.h
   mbwall 7may95
@@ -53,6 +53,7 @@ public:
   int sameClass(const GAID &b) const {return(classID() == b.classID());} 
   virtual const char * className() const {return "no class";} 
   virtual int classID() const {return 0;}
+  virtual ~GAID() { }
 };
 
 

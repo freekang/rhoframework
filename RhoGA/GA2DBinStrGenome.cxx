@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GA2DBinStrGenome.cxx,v 1.2 2001-12-17 17:55:22 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   binstr2.C
   mbwall 19apr95
@@ -134,9 +134,9 @@ GA2DBinaryStringGenome::resize(int w, int h)
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 int
-GA2DBinaryStringGenome::read(std::istream & is)
+GA2DBinaryStringGenome::read(STD_ISTREAM & is)
 {
   static char c;
   unsigned int i=0, j=0;
@@ -157,7 +157,7 @@ GA2DBinaryStringGenome::read(std::istream & is)
      ((j < ny) ||	     // didn't get some lines
       (i < nx && i != 0))){   // stopped early on a row
     GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
-    is.clear(ios::badbit | is.rdstate());
+    is.clear(STD_IOS_BADBIT | is.rdstate());
     return 1;
   }
 
@@ -168,7 +168,7 @@ GA2DBinaryStringGenome::read(std::istream & is)
 // Dump the digits to the stream with a newline between each row.  No newline
 // at the end of the whole thing.
 int
-GA2DBinaryStringGenome::write(std::ostream & os) const 
+GA2DBinaryStringGenome::write(STD_OSTREAM & os) const 
 {
   for(unsigned int j=0; j<ny; j++){
     for(unsigned int i=0; i<nx; i++)

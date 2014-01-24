@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAAllele.cxx,v 1.2 2001-12-17 17:56:33 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   allele.C
   mbwall 21mar95
@@ -243,14 +243,14 @@ GAAlleleSet<T>::allele(unsigned int i) const {
 
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 template <class T> int
-GAAlleleSet<T>::read(std::istream&){
+GAAlleleSet<T>::read(STD_ISTREAM&){
   GAErr(GA_LOC, "GAAlleleSet", "read", gaErrOpUndef);
   return 1;
 }
 template <class T> int 
-GAAlleleSet<T>::write(std::ostream &) const {
+GAAlleleSet<T>::write(STD_OSTREAM &) const {
   GAErr(GA_LOC, "GAAlleleSet", "write", gaErrOpUndef);
   return 1;
 }
@@ -261,7 +261,7 @@ GAAlleleSet<T>::write(std::ostream &) const {
 // The default read assumes input in the format that we write out.
 //   We should do more checks on the values that we read in.
 template <class T> int
-GAAlleleSet<T>::read(std::istream& is){
+GAAlleleSet<T>::read(STD_ISTREAM& is){
   char buf[32];
   int n;
   if(is.fail() || is.eof()) return 1;
@@ -313,7 +313,7 @@ GAAlleleSet<T>::read(std::istream& is){
     if(is.fail() || is.eof()) return 1;
   }
   else {
-    is.clear(ios::badbit | is.rdstate());
+    is.clear(STD_IOS_BADBIT | is.rdstate());
     GAErr(GA_LOC, "GAAlleleSet", "read",
 	  "unrecognized allele set type.", 
 	  "Expected ENUMERATED, BOUNDED, or DISCRETIZED");
@@ -325,7 +325,7 @@ GAAlleleSet<T>::read(std::istream& is){
 // The default write method prints out the type of the allele set followed by
 // the contents.  We use a single space as our separator.
 template <class T> int 
-GAAlleleSet<T>::write(std::ostream & os) const {
+GAAlleleSet<T>::write(STD_OSTREAM & os) const {
   switch(core->type){
   case GAAllele::ENUMERATED:
     os << "ENUMERATED ";

@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GATreeGenome.cxx,v 1.2 2001-12-17 17:59:38 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   tree.C
   mbwall 25feb95
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <RhoGA/GATreeGenome.h>
+#include <RhoGA/garandom.h>
 
 
 extern int _GATreeCompare(GANodeBASE * anode, GANodeBASE * bnode);
@@ -67,7 +68,7 @@ GATreeGenome<T>::copy(const GAGenome & orig) {
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 // Traverse the tree (breadth-first) and dump the contents as best we can to
 // the stream.  We don't try to write the contents of the nodes - we simply 
 // write a . for each node in the tree.
@@ -76,7 +77,7 @@ GATreeGenome<T>::copy(const GAGenome & orig) {
 // order we get them in the traversal.  Each coord pair is measured relative to
 // the parent of the node.
 template <class T> void
-_tt(std::ostream & os, GANode<T> * n)
+_tt(STD_OSTREAM & os, GANode<T> * n)
 {
   if(!n) return;
   GANodeBASE * node = DYN_CAST(GANodeBASE*, n);
@@ -101,10 +102,10 @@ _tt(std::ostream & os, GANode<T> * n)
 }
 
 template <class T> int
-GATreeGenome<T>::write(std::ostream & os) const 
+GATreeGenome<T>::write(STD_OSTREAM & os) const 
 {
   os << "node       parent     child      next       prev       contents\n";
-  _tt(os, (GANode<T> *)rt);
+  _tt(os, (GANode<T> *)(this->rt));
   return 0;
 }
 #endif
@@ -115,7 +116,7 @@ GATreeGenome<T>::equal(const GAGenome & c) const
 {
   if(this == &c) return 1;
   const GATreeGenome<T>& b = DYN_CAST(const GATreeGenome<T>&, c);
-  return _GATreeCompare(rt, b.rt) ? 0 : 1;
+  return _GATreeCompare(this->rt, b.rt) ? 0 : 1;
 }
 
 

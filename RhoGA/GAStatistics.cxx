@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GAStatistics.cxx,v 1.2 2001-12-17 17:59:11 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   statistics.C
   mbwall 28jul94
@@ -487,10 +487,10 @@ GAStatistics::resizeScores(unsigned int n){
 void
 GAStatistics::writeScores(){
   if(!scorefile) return;
-#ifndef NO_STREAMS
-  ofstream outfile(scorefile, ((gen[0] == 0) ?
-			       (ios::out | ios::trunc) :
-			       (ios::out | ios::app)));
+#ifdef GALIB_USE_STREAMS
+  STD_OFSTREAM outfile(scorefile, ((gen[0] == 0) ?
+				   (STD_IOS_OUT | STD_IOS_TRUNC) :
+				   (STD_IOS_OUT | STD_IOS_APP)));
 // should be done this way, but SGI systems (and others?) don't do it right...
 //  if(! outfile.is_open()){
   if(outfile.fail()){
@@ -503,10 +503,10 @@ GAStatistics::writeScores(){
 }
 
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 int 
 GAStatistics::write(const char* filename) const {
-  ofstream outfile(filename, (ios::out | ios::trunc));
+  STD_OFSTREAM outfile(filename, (STD_IOS_OUT | STD_IOS_TRUNC));
 // should be done this way, but SGI systems (and others?) don't do it right...
 //  if(! outfile.is_open()){
   if(outfile.fail()){
@@ -519,7 +519,7 @@ GAStatistics::write(const char* filename) const {
 }
 
 int
-GAStatistics::write(std::ostream & os) const {
+GAStatistics::write(STD_OSTREAM & os) const {
   os << curgen << "\t# current generation\n";
   os << convergence() << "\t# current convergence\n";
   os << numsel << "\t# number of selections since initialization\n";
@@ -559,7 +559,7 @@ GAStatistics::write(std::ostream & os) const {
 // specify a data set, that will be used rather than the 'which' in the object.
 int 
 GAStatistics::scores(const char* filename, int w){
-  ofstream outfile(filename, (ios::out | ios::trunc));
+  STD_OFSTREAM outfile(filename, (STD_IOS_OUT | STD_IOS_TRUNC));
 // should be done this way, but SGI systems (and others?) don't do it right...
 //  if(! outfile.is_open()){
   if(outfile.fail()){
@@ -573,7 +573,7 @@ GAStatistics::scores(const char* filename, int w){
 
 
 int
-GAStatistics::scores(std::ostream & os, int w){
+GAStatistics::scores(STD_OSTREAM & os, int w){
   if(w == NoScores) w = which;
 
   for(unsigned int i=0; i<nscrs; i++){

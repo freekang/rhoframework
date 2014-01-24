@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GASelector.h,v 1.1.1.1 2001-05-04 16:14:25 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   selector.h
   mbwall 10aug94

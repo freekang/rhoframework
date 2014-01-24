@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GABaseGA.cxx,v 1.2 2001-12-17 17:56:50 Marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   gabase.C
   mbwall 28jul94
@@ -33,7 +33,13 @@ int   gaDefSelectScores     = GAStatistics::Maximum;
 int   gaDefMiniMaxi         = 1;
 GABoolean gaDefDivFlag      = gaFalse;
 GABoolean gaDefElitism      = gaTrue;
+int   gaDefSeed             = 0;
 
+
+
+// return the configuration string that identifies this build of the library.
+static const char* rcsid = GALIB_LIBRARY_IDENTIFIER;
+const char* GAConfig() { return rcsid; }
 
 
 
@@ -114,6 +120,7 @@ GAGeneticAlgorithm::TerminateUponPopConvergence(GAGeneticAlgorithm & ga){
 
 GAParameterList&
 GAGeneticAlgorithm::registerDefaultParameters(GAParameterList& p) {
+  p.add(gaNseed, gaSNseed, GAParameter::INT, &gaDefSeed);
   p.add(gaNminimaxi, gaSNminimaxi, GAParameter::INT, &gaDefMiniMaxi);
   p.add(gaNnGenerations, gaSNnGenerations, GAParameter::INT, &gaDefNumGen);
   p.add(gaNnConvergence, gaSNnConvergence, GAParameter::INT, &gaDefNConv);
@@ -146,6 +153,9 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAGenome& g) : stats(), params() {
 
   ud = (void *)0;
   cf = GAGeneticAlgorithm::DEFAULT_TERMINATOR;
+
+  d_seed = gaDefSeed;
+  params.add(gaNseed, gaSNseed, GAParameter::INT, &d_seed);
 
   minmax = gaDefMiniMaxi;
   params.add(gaNminimaxi, gaSNminimaxi, GAParameter::INT, &minmax);
@@ -192,6 +202,9 @@ stats(), params() {
 
   ud = (void *)0;
   cf = GAGeneticAlgorithm::DEFAULT_TERMINATOR;
+
+  d_seed = gaDefSeed;
+  params.add(gaNseed, gaSNseed, GAParameter::INT, &d_seed);
 
   minmax = gaDefMiniMaxi;
   params.add(gaNminimaxi, gaSNminimaxi, GAParameter::INT, &minmax);
@@ -240,6 +253,7 @@ stats(ga.stats), params(ga.params){
   ngen = ga.ngen; nconv = ga.nconv; pconv = ga.pconv;
   pcross = ga.pcross; pmut = ga.pmut; minmax = ga.minmax;
   scross = ga.scross; across = ga.across;
+  d_seed = ga.d_seed;
 }
 
 GAGeneticAlgorithm::~GAGeneticAlgorithm() {
@@ -259,6 +273,7 @@ GAGeneticAlgorithm::copy(const GAGeneticAlgorithm& ga) {
   ngen = ga.ngen; nconv = ga.nconv; pconv = ga.pconv;
   pcross = ga.pcross; pmut = ga.pmut; minmax = ga.minmax;
   scross = ga.scross; across = ga.across;
+  d_seed = ga.d_seed;
 }
 
 
@@ -283,7 +298,7 @@ GAGeneticAlgorithm::parameters(int& argc, char **argv, GABoolean flag){
   return params;
 }
 
-#ifndef NO_STREAMS
+#ifdef GALIB_USE_STREAMS
 const GAParameterList&
 GAGeneticAlgorithm::parameters(const char* filename, GABoolean flag){
   params.read(filename, flag);
@@ -293,7 +308,7 @@ GAGeneticAlgorithm::parameters(const char* filename, GABoolean flag){
 }
 
 const GAParameterList&
-GAGeneticAlgorithm::parameters(std::istream& is, GABoolean flag){
+GAGeneticAlgorithm::parameters(STD_ISTREAM& is, GABoolean flag){
   params.read(is, flag);
   for(int i=0; i<params.size(); i++)
     setptr(params[i].fullname(), params[i].value());
@@ -446,7 +461,12 @@ int
 GAGeneticAlgorithm::get(const char* name, void* value) const {
   int status=1;
 
-  if(strcmp(name, gaNnBestGenomes) == 0 ||
+  if(strcmp(name, gaNseed) == 0 ||
+     strcmp(name, gaSNseed) == 0){
+    *((int*)value) = d_seed;
+    status = 0;
+  }
+  else if(strcmp(name, gaNnBestGenomes) == 0 ||
      strcmp(name, gaSNnBestGenomes) == 0){
     *((int*)value) = stats.nBestGenomes();
     status = 0;

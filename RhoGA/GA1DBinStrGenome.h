@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GA1DBinStrGenome.h,v 1.3 2002-02-01 03:50:31 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   binstr1.h
   mbwall 19apr95
@@ -75,9 +75,9 @@ public:
   virtual GAGenome *clone(GAGenome::CloneMethod flag=CONTENTS) const;
   virtual void copy(const GAGenome&);
 
-#ifndef NO_STREAMS
-  virtual int read(istream & is);
-  virtual int write (ostream & os) const;
+#ifdef GALIB_USE_STREAMS
+  virtual int read(STD_ISTREAM & is);
+  virtual int write (STD_OSTREAM & os) const;
 #endif
 
   virtual int equal(const GAGenome & c) const;

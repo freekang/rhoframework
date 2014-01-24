@@ -1,4 +1,4 @@
-// $Header: /cvs/hep/rho/RhoGA/GATree.h,v 1.1.1.1 2001-05-04 16:14:49 marcel Exp $
+// $Header$
 /* ----------------------------------------------------------------------------
   treetmpl.h
   mbwall 25feb95
@@ -228,7 +228,7 @@ private:
 };
 
 
-#ifdef USE_BORLAND_INST
+#ifdef GALIB_USE_BORLAND_INST
 #include <RhoGA/GATree.cxx>
 #endif
 

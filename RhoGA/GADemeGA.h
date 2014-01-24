@@ -95,10 +95,10 @@ protected:
   unsigned int nmig;		// number to migrate from each population
 };
 
-#ifndef NO_STREAMS
-inline ostream & operator<< (ostream & os, GADemeGA & arg)
+#ifdef GALIB_USE_STREAMS
+inline STD_OSTREAM & operator<< (STD_OSTREAM & os, GADemeGA & arg)
 {arg.write(os); return(os);}
-inline istream & operator>> (istream & is, GADemeGA & arg)
+inline STD_ISTREAM & operator>> (STD_ISTREAM & is, GADemeGA & arg)
 {arg.read(is); return(is);}
 #endif
 
