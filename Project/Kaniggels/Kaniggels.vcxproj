@@ -10,14 +10,10 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\RhoExamples\RhoToolsTest.cxx" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{28FB9B6F-14C1-49D1-8BA4-327EA3716A67}</ProjectGuid>
+    <ProjectGuid>{52689B02-719C-4AE4-B2BB-3E1A285791C1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NetworkTrainer</RootNamespace>
-    <ProjectName>RhoToolsTest</ProjectName>
+    <RootNamespace>Kaniggels</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -55,11 +51,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>RhoNNO.lib;RhoBase.lib;RhoConditions.lib;RhoTools.lib;RhoMath.lib;RhoManager.lib;RhoSelector.lib;RhoHistogram.lib;PAFSchema.lib;KangaSchema.lib;libCore.lib;libCint.lib;libHist.lib;libGraf.lib;libGraf3d.lib;libGpad.lib;libTree.lib;libTreePlayer.lib;libRint.lib;libPostscript.lib;libMatrix.lib;libPhysics.lib;libNet.lib;libRIO.lib;libMathCore.lib;libEG.lib;libRootAuth.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>RhoGA.lib;RhoNNO.lib;RhoBase.lib;RhoConditions.lib;RhoTools.lib;RhoMath.lib;RhoManager.lib;RhoSelector.lib;RhoHistogram.lib;PAFSchema.lib;KangaSchema.lib;libCore.lib;libMathCore.lib;libCint.lib;libHist.lib;libGraf.lib;libGraf3d.lib;libGpad.lib;libTree.lib;libTreePlayer.lib;libRint.lib;libPostscript.lib;libMatrix.lib;libRIO.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -79,6 +76,9 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\RhoExamples\Kaniggels.cxx" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

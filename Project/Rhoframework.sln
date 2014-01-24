@@ -33,6 +33,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PAFSchema", "PAFSchema\PAFS
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KangaSchema", "KangaSchema\KangaSchema.vcxproj", "{CEA72C51-454E-4AC6-99F5-5E2E98CECE37}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RhoGA", "RhoGA\RhoGA.vcxproj", "{22136399-7EA1-4C39-8E02-9FAF5D61A4F5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Kaniggels", "Kaniggels\Kaniggels.vcxproj", "{52689B02-719C-4AE4-B2BB-3E1A285791C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -91,6 +95,14 @@ Global
 		{CEA72C51-454E-4AC6-99F5-5E2E98CECE37}.Debug|Win32.Build.0 = Debug|Win32
 		{CEA72C51-454E-4AC6-99F5-5E2E98CECE37}.Release|Win32.ActiveCfg = Release|Win32
 		{CEA72C51-454E-4AC6-99F5-5E2E98CECE37}.Release|Win32.Build.0 = Release|Win32
+		{22136399-7EA1-4C39-8E02-9FAF5D61A4F5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{22136399-7EA1-4C39-8E02-9FAF5D61A4F5}.Debug|Win32.Build.0 = Debug|Win32
+		{22136399-7EA1-4C39-8E02-9FAF5D61A4F5}.Release|Win32.ActiveCfg = Release|Win32
+		{22136399-7EA1-4C39-8E02-9FAF5D61A4F5}.Release|Win32.Build.0 = Release|Win32
+		{52689B02-719C-4AE4-B2BB-3E1A285791C1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{52689B02-719C-4AE4-B2BB-3E1A285791C1}.Debug|Win32.Build.0 = Debug|Win32
+		{52689B02-719C-4AE4-B2BB-3E1A285791C1}.Release|Win32.ActiveCfg = Release|Win32
+		{52689B02-719C-4AE4-B2BB-3E1A285791C1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

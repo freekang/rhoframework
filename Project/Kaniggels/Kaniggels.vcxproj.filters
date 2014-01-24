@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\RhoExamples\RhoToolsTest.cxx">
+    <ClCompile Include="..\..\RhoExamples\Kaniggels.cxx">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
