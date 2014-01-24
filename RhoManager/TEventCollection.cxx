@@ -99,7 +99,7 @@ string
 TEventCollection::GetFileName() const 
 {
     if (fCurrentFileName.Length()>0) {
-	return fCurrentFileName;
+	return string(fCurrentFileName.Data());
     } else {
 	return 0;
     }

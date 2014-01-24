@@ -91,7 +91,7 @@ string TDirectoryManager::GetFileName() const
     if (fFiles.At(fActualFile) == 0) return "";
 	TObject *o = fFiles.At(fActualFile);
 	TObjString* os = (TObjString*) o;
-	string s = os->GetString();
+	string s = string(os->GetString().Data());
 	return s;
 }
 

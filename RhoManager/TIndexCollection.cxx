@@ -74,7 +74,7 @@ TIndexCollection::Rewind()
 string
 TIndexCollection::GetFileName() const 
 {
-  return fFilename;
+  return string(fFilename.Data());
 }
 
 //--------------
