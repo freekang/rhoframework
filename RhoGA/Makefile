@@ -14,14 +14,16 @@ ROOTGLIBS     = $(shell root-config --glibs)
  
 # Linux with egcs
 CXX           = g++
-CXXFLAGS      = -m32 -DBABAR_COMP_INST -fno-exceptions -fPIC -I..
+CXXFLAGS      = $(RHOARCH) -fno-exceptions -fPIC -I..
 LD            = g++
-LDFLAGS       = -m32 -Wl,-rpath,/lib:$(LIBDIR):$(ROOTSYS)/lib
-SOFLAGS       = -shared
+LDFLAGS       = -Wl,-rpath,/lib:$(LIBDIR):$(ROOTSYS)/lib
+SOFLAGS       = $(RHOARCH) -shared
 
 CXXFLAGS     += $(ROOTCFLAGS)
 LIBS          = $(ROOTLIBS) -lEG -lProof -lTreePlayer
 GLIBS         = $(ROOTGLIBS) -lEG -lProof -lTreePlayer
+
+RHOLIBS       = -L$(RHO)/lib -lRhoGA
 
 # Get dependencies:
 include GNUmake-depend.mk

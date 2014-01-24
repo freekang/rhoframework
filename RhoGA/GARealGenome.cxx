@@ -301,8 +301,8 @@ GARealBlendCrossover(const GAGenome& p1, const GAGenome& p2,
 // some compilers require a syntax different than others when forcing the 
 // instantiation (i.e. GNU wants the 'template class', borland does not).
 #ifndef GALIB_USE_AUTO_INST
-#include <RhoGA/GAAllele.C>
-#include <RhoGA/GA1DArrayGenome.C>
+#include <RhoGA/GAAllele.cxx>
+#include <RhoGA/GA1DArrayGenome.cxx>
 
 #if defined(__BORLANDC__)
 #define GALIB_REALGENOME_TEMPLATE_PREFACE

@@ -1,21 +1,21 @@
-#PAF standalone makefile
+#T standalone makefile
 PACKAGE = RhoGA
 
 LIBA	= lib$(PACKAGE).a
 LIBSO	= lib$(PACKAGE).so
 
 # Lists of objects to include in library:
-NAMELIST = GA1DArrayGenome GAAllele GADemeGA GAListGenome GASStateGA GATree gaerror \
-GA1DBinStrGenome GAScaling GATreeBASE \
-GA2DArrayGenome GABaseGA GAGenome GASelector GATreeGenome garandom \
-GA2DBinStrGenome GABin2DecGenome GAIncGA GAParameter GASimpleGA \
-GA3DArrayGenome GABinStr GAList GAPopulation GAStatistics gabincvt \
-GA3DBinStrGenome GADCrowdingGA GAListBASE GARealGenome GAStringGenome
+NAMELIST = \
+GA1DArrayGenome GA3DBinStrGenome GABinStr GAIncGA GAPopulation GASimpleGA GATree \
+GA1DBinStrGenome GAAllele GADCrowdingGA GAListBASE garandom GASStateGA GATreeGenome \
+GA2DArrayGenome GABaseGA GADemeGA GAList GARealGenome GAStatistics \
+GA2DBinStrGenome GABin2DecGenome gaerror GAListGenome GAScaling GAStringGenome \
+GA3DArrayGenome gabincvt GAGenome GAParameter GASelector GATreeBASE
 
 HDRS    = $(addsuffix .h, $(NAMELIST) )
 OBJS    = $(addsuffix .o, $(NAMELIST) )
 #ROOTCINTTARGETS := $(filter-out $(PACKAGE)_LinkDef.rdl, $(wildcard *.rdl)) $(wildcard $(PACKAGE)_LinkDef.rdl)
-#ROOTCINTHDRS :=   $(addsuffix .hh, $(basename $(ROOTCINTTARGETS)) )
+#ROOTCINTHDRS :=   $(addsuffix .h, $(basename $(ROOTCINTTARGETS)) )
 ROOTCINTHDRS := $(HDRS) $(PACKAGE)_LinkDef.h
 
 # Default action 
@@ -32,8 +32,7 @@ $(LIBA) : $(OBJS)
 
 # Shared library:
 $(LIBSO) : $(OBJS)
-	$(LD) -g -L$(RHO)/lib $(SOFLAGS) $(GLIBS) -o $(LIBDIR)/$@ $^
-	$(LD) -dynamiclib -single_module -undefined dynamic_lookup -install_name $(LIBDIR)/$@ -L$(RHO)/lib $(LDFLAGS) $(GLIBS) -o $(LIBDIR)/$@ $^
+	$(LD) $(SOFLAGS) $(LDFLAGS) $^ $(GLIBS) $(RHOLIBS) -o $(LIBDIR)/$(LIBSO) $(EXPLLINKLIBS)
 
 # Rules for Dictionary:
 $(PACKAGE)Cint.o : $(PACKAGE)Cint.cxx 
