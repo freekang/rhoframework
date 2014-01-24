@@ -11,7 +11,7 @@ RhoToolsTest : RhoToolsTest.o
 	$(CXX) -g $(CXXFLAGS) $(LDFLAGS) $< $(RHOLIBS) $(GLIBS) -o $(BINDIR)/$@
 
 Kaniggels : Kaniggels.o
-	$(CXX) -g $(CXXFLAGS) $(LDFLAGS) $< $(RHOLIBS) $(GLIBS) -o $(BINDIR)/$@
+	$(CXX) -g $(CXXFLAGS) $(LDFLAGS) $< $(RHOLIBS) $(GLIBS) $(GALIB) -o $(BINDIR)/$@
 
 NetworkTrainer : NetworkTrainer.o
 	$(CXX) -g $(CXXFLAGS) $(LDFLAGS) $< $(RHOLIBS) $(GLIBS) -o $(BINDIR)/$@
