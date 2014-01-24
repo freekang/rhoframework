@@ -52,6 +52,7 @@
 // Root headers
 
 #include "TVirtualX.h"
+#include "TVirtualViewer3D.h"
 #include "TROOT.h"
 #include "TSystem.h"
 #include "TFile.h"
@@ -1005,7 +1006,7 @@ void PAFDisplay::DrawViewGL()
     pad->cd();
     TView *view = pad->GetView();
     if (!view) return;
-    pad->x3d("OPENGL");
+    TVirtualViewer3D * v = pad->GetViewer3D("ogl");
 }
 
 //_____________________________________________________________________________
@@ -1017,7 +1018,7 @@ void PAFDisplay::DrawViewX3D()
     pad->cd();
     TView *view = pad->GetView();
     if (!view) return;
-    pad->x3d();
+    TVirtualViewer3D * v = pad->GetViewer3D("x3d");
 }
 
 //_____________________________________________________________________________
