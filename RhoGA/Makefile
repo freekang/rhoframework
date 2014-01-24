@@ -23,7 +23,7 @@ CXXFLAGS     += $(ROOTCFLAGS)
 LIBS          = $(ROOTLIBS) -lEG -lProof -lTreePlayer
 GLIBS         = $(ROOTGLIBS) -lEG -lProof -lTreePlayer
 
-RHOLIBS       = -L$(RHO)/lib -lRhoGA
+RHOLIBS       = -L$(RHO)/lib
 
 # Get dependencies:
 include GNUmake-depend.mk
