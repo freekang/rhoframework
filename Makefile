@@ -15,7 +15,7 @@ exam:
 
 SUBS:
 	cd ./RhoNNO; make
-#	cd ./RhoGA; make
+	cd ./RhoGA; make
 	cd ./RhoMath; make
 	cd ./RhoBase; make
 	cd ./RhoConditions; make
