@@ -15,10 +15,10 @@
     gSystem->Load("$RHO/lib/RhoHistogram.dll");
     gSystem->Load("$RHO/lib/RhoTools.dll");
 #ifdef DISPLAY
-    gSystem->Load("$PAF/lib/PAFDisplay.dll");
+    gSystem->Load("$RHO/lib/PAFDisplay.dll");
 #endif
 #ifdef BETAPID
-    gSystem->Load("$PAF/lib/PAFBetaPid.dll");
+    gSystem->Load("$RHO/lib/PAFBetaPid.dll");
 #endif
 
 // This is the UNIX section
